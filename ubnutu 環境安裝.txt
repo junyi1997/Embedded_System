@@ -1,0 +1,10 @@
+sudo apt-get install git-all
+sudo apt-get install glibc-doc
+sudo apt-get install manpages-posix manpages-posix-dev
+apt-get install g++
+
+複製貼上：
+sudo apt install dkms build-essential linux-headers-generic
+接著再到 >裝置>插入Guest Additions CD映像
+重新安裝GA，右上角的"Run Software"用力地點下去!!!
+
