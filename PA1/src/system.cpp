@@ -210,7 +210,7 @@ System::globalMultiCoreMatrixMulti()
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Create thread and join
     pthread_t thread1;
-    pthread_create(&thread1, NULL, Multi_Matrix_Multiplication, NULL);
+    pthread_create(&thread1, NULL, globalMultiCoreMatrixMulti, NULL);
     pthread_join(thread1, NULL);
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
