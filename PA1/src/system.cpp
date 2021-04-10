@@ -19,7 +19,7 @@ System::System(char* input_file)
     for (int i = 0; i<numThread; i++) {
 #if (PART == 1)
         // Set the singleResult, multResult, and matrix to thread.
-		threadSet[i].initialThread(singleResult[4], multiResult[4], matrix[4]);
+		threadSet[i].initialThread(singleResult[3], multiResult[3], matrix[3]);
 	    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
         // Set up the calculate range of matrix.
 	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
