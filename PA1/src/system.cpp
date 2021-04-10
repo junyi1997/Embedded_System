@@ -19,7 +19,7 @@ System::System(char* input_file)
     for (int i = 0; i<numThread; i++) {
 #if (PART == 1)
         // Set the singleResult, multResult, and matrix to thread.
-		threadSet[i].initialThread(singleResult[3], multiResult[3], matrix[3]);
+		threadSet[i].initialThread(singleResult[0], multiResult[0], matrix[0]);
 	    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
         // Set up the calculate range of matrix.
 	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
@@ -209,6 +209,9 @@ System::globalMultiCoreMatrixMulti()
 
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Create thread and join
+    pthread_t thread1;
+    pthread_create(&thread1, NULL, Multi_Matrix_Multiplication, NULL);
+    pthread_join(thread1, NULL);
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     setEndTime();
