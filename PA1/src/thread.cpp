@@ -33,7 +33,7 @@ void
 Thread::setUpCPUAffinityMask(int cpu_num)
 {
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-    // Pined the thread to core.
+    // Pined the thread to core.將線程固定到核心。
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
 
@@ -136,6 +136,29 @@ Thread::singleMatrixMultiplication()
  * switch or not. If there is context swich then print out it was
  * switch from thread # to thread #.
  *
+ *
+ *矩陣乘法運算並將結果存儲到
+  * multieResult。
+  *
+  * 1.對於所有部分，將線程固定到coresspond依賴於core
+  * 在變量setCore上。
+  *
+  * 2.對於所有部分，使用系統調用檢查的是線程migrat
+  *對他人的核心與否。
+  *
+  * 3.對於Part3，調用成員函數setUpScheduler來設置
+  *當前線程的調度程序，並打印出當前的Core0
+  *執行線程ID以觀察FIFO和RR之間的差異。
+  *
+  * @第1部分建議：
+  *將當前線程固定在指定內核上的實現。
+  *可以通過調用功能SetUpCPUAffinityMask或其他方法來完成。
+  *實現檢測到的線程是否遷移。
+  *
+  * @第3部分建議：
+  *執行檢測到的Core0遇到上下文
+  *是否切換。 如果有上下文切換，則將其打印出來
+  *從線程＃切換到線程＃。 
  */
 void*
 Thread::matrixMultiplication(void* args)
@@ -147,7 +170,7 @@ Thread::matrixMultiplication(void* args)
 #endif
 
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-    // Set up the affinity mask
+    // Set up the affinity mask 設置親和力掩碼
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     /* matrix multiplication */
@@ -159,7 +182,7 @@ Thread::matrixMultiplication(void* args)
             }	
 
 	        /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-            // Observe the thread migration
+            // Observe the thread migration 觀察線程遷移
 	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 		}
@@ -207,6 +230,6 @@ void
 Thread::setUpScheduler()
 {
 	/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
-    // Set up the scheduler for current thread
+    // Set up the scheduler for current thread 為當前線程設置調度程序
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
