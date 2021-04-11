@@ -210,7 +210,7 @@ System::globalMultiCoreMatrixMulti()
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Create thread and join
     pthread_t thread1;
-    pthread_create(&thread1, NULL, System::globalMultiCoreMatrixMulti, NULL);
+    pthread_create(&thread1, NULL, thread1_main, NULL);
     pthread_join(thread1, NULL);
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
@@ -218,7 +218,7 @@ System::globalMultiCoreMatrixMulti()
     std::cout << "Global Multi Thread Spend time : " << _timeUse << std::endl;
     cleanMultiResult();
 }
-
+void thread1_main() { std::cout << "thread1" <<  std::endl; }
 
 /*
  * Creating the thread for matrix multiplication, each thread has pinned
