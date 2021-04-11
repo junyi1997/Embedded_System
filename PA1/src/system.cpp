@@ -202,7 +202,7 @@ System::cleanMultiResult()
  */
 
 void
-System::thread1_main()
+thread1_main()
 {
     std::cout << "thread1" << std::endl;
 }
