@@ -139,11 +139,7 @@ Thread::singleMatrixMultiplication()
  *
  */
 
-static void*
-thread1_main(void*)
-{
-	std::cout << "thread1" << std::endl;
-}
+static void*thread1_main(void*){std::cout << "thread1" << std::endl;}
 
 void*
 Thread::matrixMultiplication(void* args)
@@ -153,7 +149,7 @@ Thread::matrixMultiplication(void* args)
 #if (PART == 3)
     obj->setUpScheduler();
 #endif
-pthread_t thread1;
+pthread_t thread1, thread2, thread3, thread4;
 pthread_create(&thread1, NULL, thread1_main, NULL);
 pthread_join(thread1, NULL);
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
