@@ -201,7 +201,7 @@ System::cleanMultiResult()
  *
  */
 
-static void* thread1_main(void* a) { std::cout << "thread1" << std::endl; }
+static void* thread1_main(void*) { std::cout << "thread1" << std::endl; }
 
 
 void
