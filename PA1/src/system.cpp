@@ -200,6 +200,13 @@ System::cleanMultiResult()
  * Global multi-thread matrix multiplication.
  *
  */
+
+void
+System::thread1_main()
+{
+    std::cout << "thread1" << std::endl;
+}
+
 void
 System::globalMultiCoreMatrixMulti()
 {
@@ -218,11 +225,7 @@ System::globalMultiCoreMatrixMulti()
     std::cout << "Global Multi Thread Spend time : " << _timeUse << std::endl;
     cleanMultiResult();
 }
-void 
-System::thread1_main() 
-{ 
-    std::cout << "thread1" <<  std::endl; 
-}
+
 
 /*
  * Creating the thread for matrix multiplication, each thread has pinned
