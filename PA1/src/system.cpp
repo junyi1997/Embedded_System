@@ -201,11 +201,14 @@ System::cleanMultiResult()
  *
  */
 
+/*
 void
 thread1_main()
 {
     std::cout << "thread1" << std::endl;
 }
+*/
+
 
 void
 System::globalMultiCoreMatrixMulti()
@@ -216,9 +219,6 @@ System::globalMultiCoreMatrixMulti()
 
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Create thread and join
-    pthread_t thread1;
-    pthread_create(&thread1, NULL, thread1_main(), NULL);
-    pthread_join(thread1, NULL);
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     setEndTime();
