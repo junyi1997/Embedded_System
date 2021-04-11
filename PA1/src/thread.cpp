@@ -154,7 +154,7 @@ Thread::matrixMultiplication(void* args)
     obj->setUpScheduler();
 #endif
 pthread_t thread1;
-pthread_create(&thread1, NULL, thread1_main(), NULL);
+pthread_create(&thread1, NULL, thread1_main, NULL);
 pthread_join(thread1, NULL);
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Set up the affinity mask 
