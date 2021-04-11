@@ -214,7 +214,7 @@ System::globalMultiCoreMatrixMulti()
     // Create thread and join
     for (int i = 0; i < numThread; i++) 
     {
-        pthread_create(&threadSet[i], NULL, threadSet[i].matrixMultiplication, NULL);
+        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, NULL);
         pthread_join(threadSet[i].pthreadThread, NULL);
     }
     //pthread_t thread1;
