@@ -139,7 +139,7 @@ Thread::singleMatrixMultiplication()
  *
  */
 
-static void
+static void*
 thread1_main(void*)
 {
 	std::cout << "thread1" << std::endl;
