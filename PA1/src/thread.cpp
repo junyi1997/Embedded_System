@@ -156,7 +156,7 @@ Thread::matrixMultiplication(void* args)
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 	std::cout << "Thread ID : " << obj->_ID;
 	std::cout << "\tPID : " << obj->PID;
-	std::cout << "\tCore : " << obj->core;
+	std::cout << "\tCore : " << obj->core << std::endl;
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 		for (int j = 0 ; j < obj->_matrixSize; j++) {
