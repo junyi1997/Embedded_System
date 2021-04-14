@@ -33,7 +33,7 @@ class Thread
 	
 	void initialThread (float**, float**, float**); // Set the pointer point to singleResult, multResult, and matrix define in System.
 	void singleMatrixMultiplication (); // Single thread matrix multiplication.
-	void printInformation (); // Print out the thread informaiton.
+	void printInformation (void); // Print out the thread informaiton.
 
     /* Part1 and Part3 */
     static void* matrixMultiplication (void*); // Multi-thread matrix multiplication
