@@ -22,6 +22,8 @@ System::System(char* input_file)
 		threadSet[i].initialThread(singleResult[0], multiResult[0], matrix[0]);
 	    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
         // Set up the calculate range of matrix.
+        threadSet[i].setStartCalculatePoint(0);
+        threadSet[i].setEndCalculatePoint(255);
 	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
         // Set the singleResult, multResult, and matrix to thread.
