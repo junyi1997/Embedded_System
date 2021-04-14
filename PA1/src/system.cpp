@@ -1,4 +1,4 @@
-#include "system.h"
+£~#include "system.h"
 
 /**
  * Set up the Set and threadSet dependent on the inputfile.
@@ -203,7 +203,7 @@ System::cleanMultiResult()
  *
  */
 
-static void* thread1_main(void*) { std::cout << "thread1" << std::endl; }
+//static void* thread1_main(void*) { std::cout << "thread1" << std::endl; }
 
 void
 System::globalMultiCoreMatrixMulti()
@@ -216,7 +216,7 @@ System::globalMultiCoreMatrixMulti()
     // Create thread and join
     for (int i = 0; i < numThread; i++) 
     {
-        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, NULL);
+        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         pthread_join(threadSet[i].pthreadThread, NULL);
     }
     //pthread_t thread1;

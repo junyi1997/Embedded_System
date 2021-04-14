@@ -144,6 +144,7 @@ Thread::singleMatrixMultiplication()
 void*
 Thread::matrixMultiplication(void* args)
 {
+
     Thread *obj = (Thread*)args;
 
 #if (PART == 3)
