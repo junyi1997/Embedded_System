@@ -154,7 +154,9 @@ Thread::matrixMultiplication(void* args)
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Set up the affinity mask 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-	void Thread::printInformation ();
+	std::cout << "Thread ID : " << _ID;
+	std::cout << "\tPID : " << PID;
+	std::cout << "\tCore : " << core;
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 		for (int j = 0 ; j < obj->_matrixSize; j++) {
