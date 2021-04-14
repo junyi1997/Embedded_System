@@ -22,8 +22,13 @@ System::System(char* input_file)
 		threadSet[i].initialThread(singleResult[0], multiResult[0], matrix[0]);
 	    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
         // Set up the calculate range of matrix.
-        //threadSet[i].setStartCalculatePoint(0);
-        //threadSet[i].setEndCalculatePoint(255);
+        int init_num = 0;
+        int range_num= (threadSet[i].matrix/ threadSet[i].numThread)
+        threadSet[i].setStartCalculatePoint(init_num);
+        init_num += range_num;
+        threadSet[i].setEndCalculatePoint(init_num);
+        std::cout << "Start : " << init_num- range_num << "\tEnd : " << init_num << std::endl;
+        
 	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
         // Set the singleResult, multResult, and matrix to thread.
