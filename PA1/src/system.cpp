@@ -1,4 +1,4 @@
-£~#include "system.h"
+#include "system.h"
 
 /**
  * Set up the Set and threadSet dependent on the inputfile.
