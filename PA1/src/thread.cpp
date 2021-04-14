@@ -154,7 +154,7 @@ Thread::matrixMultiplication(void* args)
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Set up the affinity mask 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-	Thread::printInformation;
+	void Thread::printInformation;
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 		for (int j = 0 ; j < obj->_matrixSize; j++) {
