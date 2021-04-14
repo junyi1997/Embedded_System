@@ -140,6 +140,23 @@ Thread::singleMatrixMultiplication()
  */
 
 
+ /*
+  * Print out the tread information.
+  *
+  */
+void
+Thread::printInformation(void)
+{
+	std::cout << "Thread ID : " << _ID;
+	std::cout << "\tPID : " << PID;
+	std::cout << "\tCore : " << core;
+#if (PART != 1)
+	std::cout << "\tUtilization : " << _utilization;
+	std::cout << "\tMatrixSize : " << _matrixSize;
+#endif
+	std::cout << std::endl;
+}
+
 
 void*
 Thread::matrixMultiplication(void* args)
@@ -185,22 +202,7 @@ Thread::matrixMultiplication(void* args)
 }
 
 
-/*
- * Print out the tread information.
- *
- */
-void
-Thread::printInformation(void)
-{
-    std::cout << "Thread ID : " << _ID ;
-    std::cout << "\tPID : " << PID;
-    std::cout << "\tCore : " << core;
-#if (PART != 1)
-    std::cout << "\tUtilization : " << _utilization;
-    std::cout << "\tMatrixSize : " << _matrixSize;	
-#endif
-    std::cout << std::endl;
-}
+
 
 
 /* 
