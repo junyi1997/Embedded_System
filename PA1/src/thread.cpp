@@ -156,8 +156,8 @@ Thread::matrixMultiplication(void* args)
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 	//std::cout << "Thread ID : " << obj->_ID << "\tPID : " << obj->PID << "\tCore : " << obj->core << std::endl;
 	/* Print Thread information */
-	core = sched_getcpu();
-	PID = syscall(SYS_gettid);
+	obj->core = sched_getcpu();
+	obj->PID = syscall(SYS_gettid);
 	printInformation();
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
