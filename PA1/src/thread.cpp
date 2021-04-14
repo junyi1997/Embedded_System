@@ -140,23 +140,6 @@ Thread::singleMatrixMultiplication()
  */
 
 
- /*
-  * Print out the tread information.
-  *
-  */
-void
-Thread::printInformation(void)
-{
-	std::cout << "Thread ID : " << _ID;
-	std::cout << "\tPID : " << PID;
-	std::cout << "\tCore : " << core;
-#if (PART != 1)
-	std::cout << "\tUtilization : " << _utilization;
-	std::cout << "\tMatrixSize : " << _matrixSize;
-#endif
-	std::cout << std::endl;
-}
-
 
 void*
 Thread::matrixMultiplication(void* args)
@@ -171,12 +154,9 @@ Thread::matrixMultiplication(void* args)
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Set up the affinity mask 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-	/*std::cout << "Thread ID : " << obj->_ID;
+	std::cout << "Thread ID : " << obj->_ID;
 	std::cout << "\tPID : " << obj->PID;
-	std::cout << "\tCore : " << obj->core << std::endl;*/
-	core = sched_getcpu();
-	PID = syscall(SYS_gettid);
-	printInformation();
+	std::cout << "\tCore : " << obj->core << std::endl;
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 		for (int j = 0 ; j < obj->_matrixSize; j++) {
@@ -204,7 +184,22 @@ Thread::matrixMultiplication(void* args)
 }
 
 
-
+/*
+ * Print out the tread information.
+ *
+ */
+void
+Thread::printInformation(void)
+{
+    std::cout << "Thread ID : " << _ID ;
+    std::cout << "\tPID : " << PID;
+    std::cout << "\tCore : " << core;
+#if (PART != 1)
+    std::cout << "\tUtilization : " << _utilization;
+    std::cout << "\tMatrixSize : " << _matrixSize;	
+#endif
+    std::cout << std::endl;
+}
 
 
 /* 
