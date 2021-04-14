@@ -217,9 +217,6 @@ System::globalMultiCoreMatrixMulti()
     for (int i = 0; i < numThread; i++) 
     {
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        std::cout << "Thread ID : " << &threadSet[i]._ID;
-        std::cout << "\tPID : " << &threadSet[i].PID;
-        std::cout << "\tCore : " << &threadSet[i].core << std::endl;
         //pthread_join(threadSet[i].pthreadThread, NULL);
     }
     for (int i = 0; i < numThread; i++)
