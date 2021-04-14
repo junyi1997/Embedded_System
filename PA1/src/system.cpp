@@ -28,7 +28,7 @@ System::System(char* input_file)
         threadSet[i].setStartCalculatePoint(init_num);//設定矩陣開始大小
         init_num += range_num;//遞增矩陣需要的編號
         threadSet[i].setEndCalculatePoint(init_num);//設定矩陣結束大小
-        std::cout << "Start : " << init_num- range_num << "\tEnd : " << init_num << std::endl;//檢視想法是否正確
+        //std::cout << "Start : " << init_num- range_num << "\tEnd : " << init_num << std::endl;//檢視想法是否正確
 	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
         // Set the singleResult, multResult, and matrix to thread.
