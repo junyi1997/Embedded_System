@@ -35,7 +35,7 @@ Thread::setUpCPUAffinityMask(int cpu_num)
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Pined the thread to core.將線程固定到核心。
 
-	CPU::createCPU(cpu_num, cpu_num);
+	CPU.createCPU(cpu_num, cpu_num);
 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
