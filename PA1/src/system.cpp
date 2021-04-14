@@ -157,14 +157,14 @@ System::singleCoreMatrixMulti()
 {
     std::cout << "\n===========Start Single Thread Matrix Multiplication===========" << std::endl; 
     setStartTime();
-/*
+
 #if (PART == 1)
 	threadSet[0].singleMatrixMultiplication();
 #else
 	for (int i = 0; i<numThread; i++)
 		threadSet[i].singleMatrixMultiplication();
 #endif
-*/
+
 
 
     setEndTime();
