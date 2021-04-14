@@ -146,7 +146,7 @@ Thread::matrixMultiplication(void* args)
 {
 
     Thread *obj = (Thread*)args;
-	//printInformation();
+	printInformation();
 #if (PART == 3)
     obj->setUpScheduler();
 #endif
