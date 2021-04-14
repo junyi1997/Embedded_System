@@ -169,6 +169,11 @@ Thread::matrixMultiplication(void* args)
 
 	        /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
             // Observe the thread migration 
+			if (core != sched_getcpu()) 
+			{
+				std::cout << "The thread " << obj->_ID << "\tPID : " << obj->PID << "\tis move from CPU " << obj->core << "\tto " << obj->sched_getcpu() << std::endl;
+				obj->core = sched_getcpu();
+			}
 	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 		}

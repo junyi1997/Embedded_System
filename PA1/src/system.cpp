@@ -23,14 +23,12 @@ System::System(char* input_file)
 		threadSet[i].initialThread(singleResult[0], multiResult[0], matrix[0]);
 	    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
         // Set up the calculate range of matrix.
-        for (int i = 0; i < (threadSet[i].matrixSize() % numThread); i++) { range_num00[i] = 1; }
-        
-        int range_num = (threadSet[i].matrixSize() / numThread)+ range_num00[i];
-        threadSet[i].setStartCalculatePoint(init_num);
-        init_num += range_num;
-        threadSet[i].setEndCalculatePoint(init_num);
-        std::cout << "Start : " << init_num- range_num << "\tEnd : " << init_num << std::endl;
-        
+        for (int i = 0; i < (threadSet[i].matrixSize() % numThread); i++) { range_num00[i] = 1; }//如果不是4的倍數時，如何平均分配
+        int range_num = (threadSet[i].matrixSize() / numThread)+ range_num00[i];//平均分配所有數量的矩陣
+        threadSet[i].setStartCalculatePoint(init_num);//設定矩陣開始大小
+        init_num += range_num;//遞增矩陣需要的編號
+        threadSet[i].setEndCalculatePoint(init_num);//設定矩陣結束大小
+        std::cout << "Start : " << init_num- range_num << "\tEnd : " << init_num << std::endl;//檢視想法是否正確
 	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
         // Set the singleResult, multResult, and matrix to thread.
@@ -223,19 +221,9 @@ System::globalMultiCoreMatrixMulti()
 
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Create thread and join
-    for (int i = 0; i < numThread; i++) 
-    {
-        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        //pthread_join(threadSet[i].pthreadThread, NULL);
-    }
-    for (int i = 0; i < numThread; i++)
-    {
-        //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        pthread_join(threadSet[i].pthreadThread, NULL);
-    }
-    //pthread_t thread1;
-    //pthread_create(&thread1, NULL, thread1_main, NULL);
-    //pthread_join(thread1, NULL);
+    for (int i = 0; i < numThread; i++){pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);}
+    for (int i = 0; i < numThread; i++){pthread_join(threadSet[i].pthreadThread, NULL);}
+    //將create與join分開，這樣才會讓系統一次性地將create做完之後再join
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     setEndTime();
@@ -266,6 +254,9 @@ System::partitionMultiCoreMatrixMulti()
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Set thread execute core.
     // Create thread and join.
+    //for (int i = 0; i < numThread; i++) { pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
+    //for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
+    //將create與join分開，這樣才會讓系統一次性地將create做完之後再join
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     setEndTime();
