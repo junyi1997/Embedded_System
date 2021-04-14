@@ -25,7 +25,7 @@ System::System(char* input_file)
         // Set up the calculate range of matrix.
         for (int i = 0; i < (threadSet[i].matrixSize() % numThread); i++) { range_num00[i] = 1; }
         
-        int range_num = (threadSet[i].matrixSize() / numThread);
+        int range_num = (threadSet[i].matrixSize() / numThread)+ range_num00[i];
         threadSet[i].setStartCalculatePoint(init_num);
         init_num += range_num;
         threadSet[i].setEndCalculatePoint(init_num);
