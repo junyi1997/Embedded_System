@@ -15,14 +15,14 @@
 System::System(char* input_file)
 {
     loadInput(input_file); // Set up threadSet, singleResult, multiResult, and matrix
-
+    int init_num = 0;
     for (int i = 0; i<numThread; i++) {
 #if (PART == 1)
         // Set the singleResult, multResult, and matrix to thread.
 		threadSet[i].initialThread(singleResult[0], multiResult[0], matrix[0]);
 	    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
         // Set up the calculate range of matrix.
-        int init_num = 0;
+        
         int range_num = (threadSet[i].matrixSize() / numThread);
         threadSet[i].setStartCalculatePoint(init_num);
         init_num += range_num;
