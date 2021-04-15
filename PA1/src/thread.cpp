@@ -48,19 +48,22 @@ Thread::setUpCPUAffinityMask(int cpu_num)
 	CPU_SET(cpu_num, &cpuset);
 
 	s = pthread_setaffinity_np(thread, sizeof(cpuset), &cpuset);
-	if (s != 0)
-		handle_error_en(s, "pthread_setaffinity_np");
+	if (s != 0) {handle_error_en(s, "pthread_setaffinity_np");}
+		
 
 	/* Check the actual affinity mask assigned to the thread. */
 
 	s = pthread_getaffinity_np(thread, sizeof(cpuset), &cpuset);
-	if (s != 0)
-		handle_error_en(s, "pthread_getaffinity_np");
+	if (s != 0) {handle_error_en(s, "pthread_getaffinity_np");}
 
-	printf("Set returned by pthread_getaffinity_np() contained:\n");
-	for (int j = 0; j < CPU_SETSIZE; j++)
-		if (CPU_ISSET(j, &cpuset))
-			printf("    CPU %d\n", j);
+	std::cout << "Set returned by pthread_getaffinity_np() contained:\n" << std::endl;
+	for (int j = 0; j < CPU_SETSIZE; j++) {
+		if (CPU_ISSET(j, &cpuset)) {
+			std::cout << "    CPU " << j << "\n" << std::endl;
+		}
+				
+	}
+		
 
 	exit(EXIT_SUCCESS);
 
