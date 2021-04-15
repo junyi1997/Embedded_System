@@ -56,10 +56,10 @@ Thread::setUpCPUAffinityMask(int cpu_num)
 	s = pthread_getaffinity_np(thread, sizeof(cpuset), &cpuset);
 	//if (s != 0) {handle_error_en(s, "pthread_getaffinity_np");}
 
-	std::cout << "Set returned by pthread_getaffinity_np() contained:\n" << std::endl;
+	std::cout << "Set returned by pthread_getaffinity_np() contained:";
 	for (int j = 0; j < CPU_SETSIZE; j++) {
 		if (CPU_ISSET(j, &cpuset)) {
-			std::cout << "    CPU " << j << "\n" << std::endl;
+			std::cout << "CPU " << j << "\n" << std::endl;
 		}
 				
 	}
