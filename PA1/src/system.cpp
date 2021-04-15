@@ -302,7 +302,7 @@ System::partitionFirstFit()
         threadSet[i].setUpCPUAffinityMask(i);
         
     }
-    cpuSet[aaa].printCPUInformation();
+    CPU::printCPUInformation();
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
