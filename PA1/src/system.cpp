@@ -299,7 +299,7 @@ System::partitionFirstFit()
         //std::cout << "aaa  " << aaa << std::endl;
         cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
         if (cpuSet[aaa].utilization() > 1 && aaa!=3) { threadSet[i].setUpCPUAffinityMask(i);aaa++; cpuSet[aaa].pushThreadToCPU(&threadSet[i]); } 
-        if (cpuSet[aaa].utilization() > 1 && aaa ==3) { std::cout << "numThread outtttt " << i << std::endl; }
+        if (cpuSet[aaa].utilization() > 1 && aaa ==3) { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
         
         
     }

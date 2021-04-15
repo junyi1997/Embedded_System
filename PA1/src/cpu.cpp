@@ -33,7 +33,6 @@ CPU::pushThreadToCPU(Thread* thread)
 	threadList[threadCount] = thread->ID();
 	_utilization += thread->utilization();
 	threadCount++;
-	if (threadCount == 8) { printCPUInformation(); }
 }
 
 
