@@ -30,7 +30,6 @@ CPU::createCPU(int thread_num, int cpu_id)
 void
 CPU::pushThreadToCPU(Thread* thread)
 {
-	std::cout << "threadCount : " << threadCount << std::endl;
 	threadList[threadCount] = thread->ID();
 	_utilization += thread->utilization();
 	threadCount++;
