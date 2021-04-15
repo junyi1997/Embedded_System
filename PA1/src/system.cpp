@@ -290,7 +290,8 @@ System::partitionFirstFit()
 
 	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
     // Implement parititon first-fit and print result.
-    for (int i = 0; i < numThread; i++) {cpuSet[i].createCPU(i, 0);}
+
+    for (int i = 0; i < numThread; i++) {cpuSet[i].pushThreadToCPU(i);}
         
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
