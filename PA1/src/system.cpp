@@ -291,7 +291,7 @@ System::partitionFirstFit()
 	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
     // Implement parititon first-fit and print result.
     std::cout << "numThread" << numThread << std::endl;
-    cpuSet[i].pushThreadToCPU(&threadSet[i]);
+    cpuSet[0].pushThreadToCPU(&threadSet[0]);
         
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
