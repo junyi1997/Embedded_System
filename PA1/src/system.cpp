@@ -301,9 +301,9 @@ System::partitionFirstFit()
         if (aaa < 4) { if (cpuSet[aaa].utilization() > 1) { aaa++; cpuSet[aaa].pushThreadToCPU(&threadSet[i]); } }
         else { std::cout << "numThread  " << i << std::endl; }
         threadSet[i].setUpCPUAffinityMask(i);
-        
+        cpuSet[aaa].printCPUInformation();
     }
-    for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
+    
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
