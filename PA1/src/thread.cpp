@@ -52,7 +52,7 @@ Thread::setUpCPUAffinityMask(int cpu_num)
 			std::cout << "CPU " << j << "\n" << std::endl;
 		}	
 	}
-	exit(EXIT_SUCCESS);
+	//exit(EXIT_SUCCESS);
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
 
