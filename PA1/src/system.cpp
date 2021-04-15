@@ -298,11 +298,11 @@ System::partitionFirstFit()
     for (int i = 0; i < numThread; i++) {
        // std::cout << "numThread  " << i << std::endl;
         cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
-        if (cpuSet[aaa].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(i); }//std::cout << "numThread  " << i << " in" << std::endl;}
-        else { aaa++; threadSet[i].setUpCPUAffinityMask(i); }//std::cout << "numThread  " << i << " out" << std::endl;}
-        //std::cout << "utilization  " << aaa << "  " << cpuSet[aaa].utilization() << std::endl;
-        cpuSet[aaa].printCPUInformation();
+        if (cpuSet[aaa].utilization() > 1) { aaa++; cpuSet[aaa].pushThreadToCPU(&threadSet[i]);}
+        threadSet[i].setUpCPUAffinityMask(i);
+        
     }
+    cpuSet[aaa].printCPUInformation();
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
