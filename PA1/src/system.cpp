@@ -300,9 +300,9 @@ System::partitionFirstFit()
         cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
         if (cpuSet[aaa].utilization() > 1) { aaa++; cpuSet[aaa].pushThreadToCPU(&threadSet[i]);}
         threadSet[i].setUpCPUAffinityMask(i);
-        cpuSet[0].printCPUInformation();
+        
     }
-
+    for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
