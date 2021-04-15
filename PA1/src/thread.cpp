@@ -35,7 +35,6 @@ Thread::setUpCPUAffinityMask(int cpu_num)
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Pined the thread to core.將線程固定到核心。
 	int s;
-	std::cout << "cpu_num " << cpu_num << std::endl;
 	cpu_set_t cpuset;
 	pthread_t thread;
 	thread = pthread_self();
@@ -46,12 +45,12 @@ Thread::setUpCPUAffinityMask(int cpu_num)
 	/* Check the actual affinity mask assigned to the thread. */
 	s = pthread_getaffinity_np(thread, sizeof(cpuset), &cpuset);
 	//if (s != 0) {handle_error_en(s, "pthread_getaffinity_np");}
-	std::cout << "Set returned by pthread_getaffinity_np() contained:";
-	for (int j = 0; j < CPU_SETSIZE; j++) {
-		if (CPU_ISSET(j, &cpuset)) {
-			std::cout << "CPU " << j << "\n" << std::endl;
-		}	
-	}
+	//std::cout << "Set returned by pthread_getaffinity_np() contained:";
+	//for (int j = 0; j < CPU_SETSIZE; j++) {
+	//	if (CPU_ISSET(j, &cpuset)) {
+	//		std::cout << "CPU " << j << "\n" << std::endl;
+	//	}	
+	//}
 	//exit(EXIT_SUCCESS);
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
