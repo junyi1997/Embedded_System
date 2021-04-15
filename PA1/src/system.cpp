@@ -296,7 +296,7 @@ System::partitionFirstFit()
     //cpuSet[0].pushThreadToCPU(&threadSet[0]);
     //std::cout << "utilization" << cpuSet[0].utilization() << std::endl;
     for (int i = 0; i < numThread; i++) {
-       // std::cout << "numThread  " << i << std::endl;
+        std::cout << "aaa  " << aaa << std::endl;
         cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
         if (cpuSet[aaa].utilization() > 1 && aaa<3) { threadSet[i].setUpCPUAffinityMask(i);aaa++; cpuSet[aaa].pushThreadToCPU(&threadSet[i]); } 
         if (cpuSet[aaa].utilization() > 1 && aaa ==4) { std::cout << "numThread  " << i << std::endl; }
