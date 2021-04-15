@@ -300,7 +300,7 @@ System::partitionFirstFit()
         cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
         if (cpuSet[aaa].utilization() > 1) { aaa++; cpuSet[aaa].pushThreadToCPU(&threadSet[i]);}
         threadSet[i].setUpCPUAffinityMask(i);
-        cpuSet[aaa].printCPUInformation();
+        cpuSet[0].printCPUInformation();
     }
 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
