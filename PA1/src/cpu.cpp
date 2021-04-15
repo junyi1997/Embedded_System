@@ -14,6 +14,7 @@ CPU::CPU()
 void
 CPU::createCPU(int thread_num, int cpu_id)
 {
+	std::cout << "thread_num : " << thread_num << std::endl;
 	threadList = new int[thread_num];
 	threadCount = 0;
 	_cpuId = cpu_id;
