@@ -293,7 +293,7 @@ System::partitionFirstFit()
     std::cout << "utilization" << cpuSet[0].utilization() << std::endl;
     //cpuSet[0]._utilization
     cpuSet[0].pushThreadToCPU(&threadSet[0]);
-        
+    std::cout << "utilization" << cpuSet[0].utilization() << std::endl;
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
