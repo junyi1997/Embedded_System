@@ -277,6 +277,7 @@ System::partitionMultiCoreMatrixMulti()
  * the partition result.
  *
  */
+int aaa = 0;
 void
 System::partitionFirstFit()
 {
@@ -290,10 +291,15 @@ System::partitionFirstFit()
 
 	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
     // Implement parititon first-fit and print result.
-    std::cout << "utilization" << cpuSet[0].utilization() << std::endl;
+    //std::cout << "utilization" << cpuSet[0].utilization() << std::endl;
     //cpuSet[0]._utilization
-    cpuSet[0].pushThreadToCPU(&threadSet[0]);
-    std::cout << "utilization" << cpuSet[0].utilization() << std::endl;
+    //cpuSet[0].pushThreadToCPU(&threadSet[0]);
+    //std::cout << "utilization" << cpuSet[0].utilization() << std::endl;
+    for (int i = 0; i < numThread; i++) {
+        cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
+        if (cpuSet[aaa].utilization() > 1) { aaa++; }
+        std::cout << "utilization" << cpuSet[0].utilization() << std::endl;
+    }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
