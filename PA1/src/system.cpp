@@ -295,7 +295,7 @@ System::partitionFirstFit()
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { 
             aaa++;
-            threadSet[i].setUpCPUAffinityMask(aaa);
+            //threadSet[i].setUpCPUAffinityMask(aaa);
             //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]);  
         }
@@ -304,7 +304,7 @@ System::partitionFirstFit()
             //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         }
         else {           
-            threadSet[i].setUpCPUAffinityMask(aaa);
+            //threadSet[i].setUpCPUAffinityMask(aaa);
             //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
         }
