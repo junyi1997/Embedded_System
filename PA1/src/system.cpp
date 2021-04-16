@@ -255,7 +255,7 @@ System::partitionMultiCoreMatrixMulti()
     // Set thread execute core.
     // Create thread and join.
     
-    for (int i = 0; i < numThread; i++) { pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
+    for (int i = 0; i < numThread; i++) { threadSet[i].setUpCPUAffinityMask(i); pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
     //將create與join分開，這樣才會讓系統一次性地將create做完之後再join
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
