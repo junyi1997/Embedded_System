@@ -183,7 +183,6 @@ Thread::matrixMultiplication(void* args)
 			for (int k = 0 ; k < obj->_matrixSize; k++) {
 				obj->multiResult[i][j] += obj->matrix[i][k] * obj->matrix[k][j];
             }	
-
 	        /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
             // Observe the thread migration 
 			if (obj->core != sched_getcpu())
@@ -192,7 +191,6 @@ Thread::matrixMultiplication(void* args)
 				obj->core = sched_getcpu();
 			}
 	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-
 		}
 #if (PART == 3)
 	    /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
