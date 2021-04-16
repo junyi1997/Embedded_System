@@ -293,6 +293,7 @@ System::partitionFirstFit()
     // Implement parititon first-fit and print result.
     setStartTime();
     for (int i = 0; i < numThread; i++) {
+        /*
         if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { 
             aaa++;
             threadSet[i].setUpCPUAffinityMask(aaa);
@@ -308,6 +309,14 @@ System::partitionFirstFit()
             pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
         }
+        */
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); }
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); }
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); }
+        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3); }
+        else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
+
+        
     }
     std::cout << "Start To Print CPU Information "  << std::endl;
     for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
