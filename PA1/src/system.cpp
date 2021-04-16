@@ -292,20 +292,24 @@ System::partitionFirstFit()
 	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
     // Implement parititon first-fit and print result.
     for (int i = 0; i < numThread; i++) {
-        threadSet[i].setUpCPUAffinityMask(0);
-        /*
+        
         if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { 
             aaa++;
             threadSet[i].setUpCPUAffinityMask(aaa); 
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
+            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         }
         else if (cpuSet[aaa].utilization() + threadSet[i].utilization() > 1 && aaa ==3) { 
             std::cout << "Thread-" << i << " is no schedulable" << std::endl; 
             //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
             //pthread_join(threadSet[i].pthreadThread, NULL);
         }
-        else {cpuSet[aaa].pushThreadToCPU(&threadSet[i]); threadSet[i].setUpCPUAffinityMask(aaa);}
-        */
+        else {
+            cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
+            threadSet[i].setUpCPUAffinityMask(aaa);
+            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+        }
+        pthread_join(threadSet[i].pthreadThread, NULL);
         
     }
     for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
