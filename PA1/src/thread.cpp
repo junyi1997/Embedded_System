@@ -215,7 +215,7 @@ Thread::matrixMultiplication(void* args)
 void
 Thread::printInformation(void)
 {
-	setUpCPUAffinityMask(core);
+	//setUpCPUAffinityMask(core);
     std::cout << "Thread ID : " << _ID ;
     std::cout << "\tPID : " << PID;
     std::cout << "\tCore : " << core;
