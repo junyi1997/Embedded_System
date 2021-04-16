@@ -296,22 +296,23 @@ System::partitionFirstFit()
         if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { 
             aaa++;
             threadSet[i].setUpCPUAffinityMask(aaa);
-            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+            //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]);  
         }
         else if (cpuSet[aaa].utilization() + threadSet[i].utilization() > 1 && aaa ==3) { 
             std::cout << "Thread-" << i << " is no schedulable" << std::endl; 
-            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+            //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         }
         else {           
             threadSet[i].setUpCPUAffinityMask(aaa);
-            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+            //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
         }
     }
     std::cout << "Start To Print CPU Information "  << std::endl;
     for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
     std::cout << "End To Print CPU Information " << std::endl;
+    for (int i = 0; i < numThread; i++) { pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
