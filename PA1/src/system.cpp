@@ -277,7 +277,7 @@ System::partitionMultiCoreMatrixMulti()
  * the partition result.
  *
  */
-int aaa = 0;
+
 void
 System::partitionFirstFit()
 {
@@ -293,23 +293,7 @@ System::partitionFirstFit()
     // Implement parititon first-fit and print result.
     setStartTime();
     for (int i = 0; i < numThread; i++) {
-        /*
-        if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { 
-            aaa++;
-            threadSet[i].setUpCPUAffinityMask(aaa);
-            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-            cpuSet[aaa].pushThreadToCPU(&threadSet[i]);  
-        }
-        else if (cpuSet[aaa].utilization() + threadSet[i].utilization() > 1 && aaa ==3) { 
-            std::cout << "Thread-" << i << " is no schedulable" << std::endl; 
-            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        }
-        else {           
-            threadSet[i].setUpCPUAffinityMask(aaa);
-            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-            cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
-        }
-        */
+
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
@@ -351,11 +335,27 @@ System::partitionBestFit()
 	for (int i = 0; i < CORE_NUM; i++)
 		cpuSet[i].emptyCPU(); // Reset the CPU set
 
-	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
-    // Implement partition best-fit and print result.
-	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
+    // Implement parititon first-fit and print result.
+    setStartTime();
+    for (int i = 0; i < numThread; i++) {
 
-    partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
+        else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
+        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+
+    }
+    for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
+    //for (int i = 0; i < numThread; i++) { pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
+    for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
+    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    setEndTime();
+    std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
+    cleanMultiResult();
+    //partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
 }
 
 
@@ -381,11 +381,31 @@ System::partitionWorstFit()
 	for (int i = 0; i < CORE_NUM; i++)
 		cpuSet[i].emptyCPU();
 	
-	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
-    // Implement partition worst-fit and print result.
-	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
+    // Implement parititon first-fit and print result.
+    setStartTime();
+    for (int i = 0; i < numThread; i++) {
+        int cpu_U_0 = cpuSet[0].utilization() + threadSet[i].utilization();
+        int cpu_U_1 = cpuSet[1].utilization() + threadSet[i].utilization();
+        int cpu_U_2 = cpuSet[2].utilization() + threadSet[i].utilization();
+        int cpu_U_3 = cpuSet[3].utilization() + threadSet[i].utilization();
 
-    partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 > cpu_U_1 && cpu_U_0 > cpu_U_2 && cpu_U_0 > cpu_U_3 ) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_1 > cpu_U_0 && cpu_U_1 > cpu_U_2 && cpu_U_1 > cpu_U_3) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 > cpu_U_1 && cpu_U_2 > cpu_U_0 && cpu_U_2 > cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 && cpu_U_3 > cpu_U_1 && cpu_U_3 > cpu_U_2 && cpu_U_3 > cpu_U_0) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
+        else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
+        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+
+    }
+    for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
+    //for (int i = 0; i < numThread; i++) { pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
+    for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
+    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    setEndTime();
+    std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
+    cleanMultiResult();
+    //partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
 }
 
 
