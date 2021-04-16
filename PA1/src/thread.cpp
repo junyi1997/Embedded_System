@@ -164,7 +164,7 @@ Thread::matrixMultiplication(void* args)
 {
 
     Thread *obj = (Thread*)args;
-	setUpCPUAffinityMask(obj->core);
+	setUpCPUAffinityMask(int(obj->core));
 #if (PART == 3)
     obj->setUpScheduler();
 #endif
