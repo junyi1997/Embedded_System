@@ -302,11 +302,11 @@ System::partitionFirstFit()
             aaa++;
             threadSet[i].setUpCPUAffinityMask(0); 
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
-            std::cout << "Thread-" << i << " CPU - " << aaa << std::endl;
+            
         }
         else if (cpuSet[aaa].utilization() + threadSet[i].utilization() > 1 && aaa ==3) { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
         else {cpuSet[aaa].pushThreadToCPU(&threadSet[i]);}
-        
+        std::cout << "Thread-" << i << " CPU - " << aaa << std::endl;
         
     }
     for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
