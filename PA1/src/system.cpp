@@ -298,9 +298,10 @@ System::partitionFirstFit()
     for (int i = 0; i < numThread; i++) {
         //std::cout << "aaa  " << aaa << std::endl;
         
-        if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { aaa++;threadSet[i].setUpCPUAffinityMask(aaa);}
+        if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { aaa++;threadSet[i].setUpCPUAffinityMask(aaa); cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
+        }
         else if (cpuSet[aaa].utilization() + threadSet[i].utilization() > 1 && aaa ==3) { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
-        cpuSet[aaa].pushThreadToCPU(&threadSet[i]);
+        else {cpuSet[aaa].pushThreadToCPU(&threadSet[i]);}
         
         
     }
