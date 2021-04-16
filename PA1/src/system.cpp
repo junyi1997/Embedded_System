@@ -307,11 +307,11 @@ System::partitionFirstFit()
         else {
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
             threadSet[i].setUpCPUAffinityMask(aaa);
-            //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         }
     }
     for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
-    //for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
+    for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
     partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
