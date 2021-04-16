@@ -176,7 +176,7 @@ Thread::matrixMultiplication(void* args)
 	/* Print Thread information */
 	obj->core = sched_getcpu();
 	obj->PID = syscall(SYS_gettid);
-	setUpCPUAffinityMask(obj->core);
+
 	obj->printInformation();
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
@@ -215,6 +215,7 @@ Thread::matrixMultiplication(void* args)
 void
 Thread::printInformation(void)
 {
+	setUpCPUAffinityMask(core);
     std::cout << "Thread ID : " << _ID ;
     std::cout << "\tPID : " << PID;
     std::cout << "\tCore : " << core;
