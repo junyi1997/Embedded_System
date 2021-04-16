@@ -343,10 +343,11 @@ System::partitionBestFit()
         int cpu_U_1 = cpuSet[1].utilization();
         int cpu_U_2 = cpuSet[2].utilization();
         int cpu_U_3 = cpuSet[3].utilization();
-        std::cout << "numThread : " << i << "  cpu_U_0 : " << cpu_U_0 << "  cpu_U_1 : " << cpu_U_1 << "  cpu_U_2 : " << cpu_U_2 << "  cpu_U_3 : " << cpu_U_3 << std::endl;
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 == 0 && cpu_U_1 == 0 && cpu_U_2 == 0 && cpu_U_3 == 0) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
-        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 != 0 && cpu_U_1 == 0 && cpu_U_2 == 0 && cpu_U_3 == 0) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
-        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 != 0 && cpu_U_1 != 0 && cpu_U_2 == 0 && cpu_U_3 == 0) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 != 0 && cpu_U_1 == 0 && cpu_U_2 == 0 && cpu_U_3 == 0) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); std::cout << "11111" << std::endl;
+        }
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 != 0 && cpu_U_1 != 0 && cpu_U_2 == 0 && cpu_U_3 == 0) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); std::cout << "22222" << std::endl;
+        }
         else if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 > cpu_U_1 && cpu_U_0 > cpu_U_2 && cpu_U_0 > cpu_U_3) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_1 > cpu_U_0 && cpu_U_1 > cpu_U_2 && cpu_U_1 > cpu_U_3) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 > cpu_U_1 && cpu_U_2 > cpu_U_0 && cpu_U_2 > cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
@@ -396,7 +397,6 @@ System::partitionWorstFit()
         int cpu_U_1 = cpuSet[1].utilization();
         int cpu_U_2 = cpuSet[2].utilization();
         int cpu_U_3 = cpuSet[3].utilization();
-        std::cout <<"numThread : "<< i << "  cpu_U_0 : " << cpu_U_0 << "  cpu_U_1 : " << cpu_U_1 << "  cpu_U_2 : " << cpu_U_2 << "  cpu_U_3 : " << cpu_U_3 << std::endl;
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 == 0 && cpu_U_1 == 0 && cpu_U_2 == 0 && cpu_U_3 == 0) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 != 0 && cpu_U_1 == 0 && cpu_U_2 == 0 && cpu_U_3 == 0) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 != 0 && cpu_U_1 != 0 && cpu_U_2 == 0 && cpu_U_3 == 0) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
