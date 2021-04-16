@@ -164,7 +164,7 @@ Thread::matrixMultiplication(void* args)
 {
 
     Thread *obj = (Thread*)args;
-	setUpCPUAffinityMask(int(obj->core));
+	
 #if (PART == 3)
     obj->setUpScheduler();
 #endif
@@ -176,8 +176,8 @@ Thread::matrixMultiplication(void* args)
 	/* Print Thread information */
 	obj->core = sched_getcpu();
 	obj->PID = syscall(SYS_gettid);
+	setUpCPUAffinityMask(obj->core);
 	obj->printInformation();
-	//setUpCPUAffinityMask(core);
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 		for (int j = 0 ; j < obj->_matrixSize; j++) {
