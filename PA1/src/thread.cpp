@@ -175,7 +175,7 @@ Thread::matrixMultiplication(void* args)
 	/* Print Thread information */
 	obj->core = sched_getcpu();
 	obj->PID = syscall(SYS_gettid);
-	//obj->printInformation();
+	obj->printInformation();
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 		for (int j = 0 ; j < obj->_matrixSize; j++) {

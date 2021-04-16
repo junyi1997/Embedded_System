@@ -302,10 +302,10 @@ System::partitionFirstFit()
             std::cout << "Thread-" << i << " is no schedulable" << std::endl; 
             pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         }
-        else {
-            cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
+        else {           
             threadSet[i].setUpCPUAffinityMask(aaa);
             pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+            cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
         }
     }
     for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
