@@ -291,6 +291,7 @@ System::partitionFirstFit()
 
 	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
     // Implement parititon first-fit and print result.
+    setStartTime();
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { 
             aaa++;
@@ -311,8 +312,10 @@ System::partitionFirstFit()
     for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-
-    partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
+    setEndTime();
+    std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
+    cleanMultiResult();
+    //partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
 }
 
 
