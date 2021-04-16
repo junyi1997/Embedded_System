@@ -177,7 +177,7 @@ Thread::matrixMultiplication(void* args)
 	obj->core = sched_getcpu();
 	obj->PID = syscall(SYS_gettid);
 	obj->printInformation();
-	setUpCPUAffinityMask(sched_getcpu());
+	setUpCPUAffinityMask(core);
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 		for (int j = 0 ; j < obj->_matrixSize; j++) {
