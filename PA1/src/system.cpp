@@ -295,14 +295,12 @@ System::partitionFirstFit()
         if (cpuSet[aaa].utilization()+ threadSet[i].utilization() > 1 && aaa!=3) { 
             aaa++;
             threadSet[i].setUpCPUAffinityMask(aaa);
-            //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]);  
         }
         else if (cpuSet[aaa].utilization() + threadSet[i].utilization() > 1 && aaa ==3) { 
             std::cout << "Thread-" << i << " is no schedulable" << std::endl; 
             pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-            //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-            //pthread_join(threadSet[i].pthreadThread, NULL);
         }
         else {
             cpuSet[aaa].pushThreadToCPU(&threadSet[i]); 
