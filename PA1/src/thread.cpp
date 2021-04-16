@@ -171,7 +171,7 @@ Thread::matrixMultiplication(void* args)
 
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Set up the affinity mask 
-	obj->setUpCPUAffinityMask(ID);
+	obj->setUpCPUAffinityMask(syscall(SYS_gettid));
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 	/* Print Thread information */
 	obj->core = sched_getcpu();
