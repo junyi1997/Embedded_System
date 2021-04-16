@@ -34,10 +34,11 @@ Thread::setUpCPUAffinityMask(int cpu_num)
 {
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     // Pined the thread to core.將線程固定到核心。
+
 	int s;
 	cpu_set_t cpuset;
 	pthread_t thread;
-	thread = pthread_self();
+	thread = pthread_self();//自己的PID
 	CPU_ZERO(&cpuset);
 	CPU_SET(cpu_num, &cpuset);
 	s = pthread_setaffinity_np(thread, sizeof(cpuset), &cpuset);
@@ -176,6 +177,7 @@ Thread::matrixMultiplication(void* args)
 	obj->core = sched_getcpu();
 	obj->PID = syscall(SYS_gettid);
 	obj->printInformation();
+	setUpCPUAffinityMask(obj->core);
     /* matrix multiplication */
 	for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 		for (int j = 0 ; j < obj->_matrixSize; j++) {
