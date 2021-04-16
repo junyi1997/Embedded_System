@@ -303,8 +303,7 @@ System::partitionFirstFit()
             //pthread_join(threadSet[i].pthreadThread, NULL);
         }
         else {cpuSet[aaa].pushThreadToCPU(&threadSet[i]); threadSet[i].setUpCPUAffinityMask(aaa);}
-        std::cout << "Thread-" << i << " CPU - " << aaa << std::endl;
-        
+        //std::cout << "Thread-" << i << " CPU - " << aaa << std::endl;
     }
     for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
