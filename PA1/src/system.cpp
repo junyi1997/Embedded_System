@@ -371,24 +371,14 @@ System::partitionFirstFit()
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-#endif 
-    /*
-    #if (PART == 3)
-    for (int i = 0; i < 8; i++) {
-        if (cpulist_0[i] != 0 && i != 1) {}
-        pthread_join(threadSet[i].pthreadThread, NULL);
-    }
-    for (int i = 0; i < numThread; i++) {  }
-    #endif  
-    */
-   
+#endif   
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
-    std::cout << "cpulist_0 : "; for (int i = 0; i < 8; i++) { if (i != 0 && cpulist_0[i]!=0) { std::cout << cpulist_0[i] << "  "; } else if(i==0) { std::cout << cpulist_0[0] << "  "; } }std::cout << "  end" << std::endl;
-    std::cout << "cpulist_1 : "; for (int i = 0; i < 8; i++) { std::cout << cpulist_1[i] << "  "; }std::cout << "  end" << std::endl;
-    std::cout << "cpulist_2 : "; for (int i = 0; i < 8; i++) { std::cout << cpulist_2[i] << "  "; }std::cout << "  end" << std::endl;
-    std::cout << "cpulist_3 : "; for (int i = 0; i < 8; i++) { std::cout << cpulist_3[i] << "  "; }std::cout << "  end" << std::endl;
+    //std::cout << "cpulist_0 : "; for (int i = 0; i < 8; i++) { if (i != 0 && cpulist_0[i]!=0) { std::cout << cpulist_0[i] << "  "; } else if(i==0) { std::cout << cpulist_0[0] << "  "; } }std::cout << "  end" << std::endl;
+    //std::cout << "cpulist_1 : "; for (int i = 0; i < 8; i++) { std::cout << cpulist_1[i] << "  "; }std::cout << "  end" << std::endl;
+    //std::cout << "cpulist_2 : "; for (int i = 0; i < 8; i++) { std::cout << cpulist_2[i] << "  "; }std::cout << "  end" << std::endl;
+    //std::cout << "cpulist_3 : "; for (int i = 0; i < 8; i++) { std::cout << cpulist_3[i] << "  "; }std::cout << "  end" << std::endl;
     cleanMultiResult();
     //partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
 }

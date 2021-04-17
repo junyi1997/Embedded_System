@@ -255,11 +255,11 @@ Thread::setUpScheduler()
 	struct sched_param sp;
 	#if (SCHEDULING == SCHED_RR)
 		sp.sched_priority = sched_get_priority_max(SCHED_RR);
-		ret = sched_setscheduler(0, SCHED_RR, &sp);
+		int ret = sched_setscheduler(0, SCHED_RR, &sp);
 	#endif
 	#if (SCHEDULING == SCHED_FIFO)
 		sp.sched_priority = sched_get_priority_max(SCHED_FIFO);
-		ret = sched_setscheduler(0, SCHED_FIFO, &sp);
+		int ret = sched_setscheduler(0, SCHED_FIFO, &sp);
 	#endif
 	
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
