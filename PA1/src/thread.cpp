@@ -204,7 +204,7 @@ Thread::matrixMultiplication(void* args)
 		/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 		// Obaserve the execute thread on core-0
 		
-		if (aaa != syscall(SYS_gettid))
+		if (obj->PID != syscall(SYS_gettid))
 		{
 			std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << syscall(SYS_gettid) << std::endl;
 			aaa = syscall(SYS_gettid);
