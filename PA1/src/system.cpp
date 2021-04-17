@@ -390,7 +390,7 @@ System::partitionBestFit()
     check->setCheckState(PARTITION_BF);
 #endif
 #if (PART == 3)
-    std::cout << "Core0 start PID - " << threadSet[0].PID_self << std::endl;
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
 #endif
 	for (int i = 0; i < CORE_NUM; i++)
 		cpuSet[i].emptyCPU(); // Reset the CPU set
