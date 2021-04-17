@@ -168,7 +168,8 @@ Thread::matrixMultiplication(void* args)
 	
 #if (PART == 3)
     obj->setUpScheduler();
-	
+	if (bbb <= 10) { bbb++; }
+	else { bbb = 0; }
 #endif
 
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
@@ -205,9 +206,7 @@ Thread::matrixMultiplication(void* args)
 			#if (PART == 3)
 			/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 			// Obaserve the execute thread on core-0
-		        if (bbb == 0) { std::cout << "Core0 start PID - " << syscall(SYS_gettid) << std::endl;}
-				if (bbb < 10) { bbb++; }
-				else { bbb = 0; }
+		        if (bbb == 1) { std::cout << "Core0 start PID - " << syscall(SYS_gettid) << std::endl;}
 				/*if (aaa != syscall(SYS_gettid))
 				{
 					std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << syscall(SYS_gettid) << std::endl;
