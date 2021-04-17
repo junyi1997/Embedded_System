@@ -363,6 +363,10 @@ System::partitionFirstFit()
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
+    std::cout << "Best-Fit cpuSet[0].threadCount_self : " << cpuSet[0].threadCount << std::endl;
+    std::cout << "Best-Fit cpuSet[1].threadCount_self : " << cpuSet[1].threadCount << std::endl;
+    std::cout << "Best-Fit cpuSet[2].threadCount_self : " << cpuSet[2].threadCount << std::endl;
+    std::cout << "Best-Fit cpuSet[3].threadCount_self : " << cpuSet[3].threadCount << std::endl;
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
     cleanMultiResult();
     //partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
@@ -411,7 +415,7 @@ System::partitionBestFit()
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
-    std::cout << "Best-Fit cpuSet[0].threadCount_self : " << cpuSet[0].threadCount_self() << std::endl;
+    
     //cpuSet[0].threadList
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
     cleanMultiResult();
