@@ -167,7 +167,6 @@ Thread::matrixMultiplication(void* args)
 	
 #if (PART == 3)
     obj->setUpScheduler();
-	std::cout << "Core0 start PID - " << obj->PID << std::endl; aaa = 1;
 #endif
 
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/

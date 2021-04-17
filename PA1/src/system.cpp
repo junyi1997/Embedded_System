@@ -343,7 +343,9 @@ System::partitionFirstFit()
 #if (PART == 2)
     check->setCheckState(PARTITION_FF);
 #endif
-
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+#endif
 
 	for (int i = 0; i < CORE_NUM; i++)
 		cpuSet[i].emptyCPU(); // Reset the CPU set
@@ -442,7 +444,9 @@ System::partitionWorstFit()
 #if (PART == 2)
     check->setCheckState(PARTITION_WF);
 #endif
-
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+#endif
 	for (int i = 0; i < CORE_NUM; i++)
 		cpuSet[i].emptyCPU();
 	
