@@ -280,6 +280,14 @@ System::partitionMultiCoreMatrixMulti()
  * the partition result.
  *
  */
+int cpulist_0[8] = { 0,0,0,0,0,0,0,0 };
+int cpulist_1[8] = { 0,0,0,0,0,0,0,0 };
+int cpulist_2[8] = { 0,0,0,0,0,0,0,0 };
+int cpulist_3[8] = { 0,0,0,0,0,0,0,0 };
+int cpulist_count_0 = 0;
+int cpulist_count_1 = 0;
+int cpulist_count_2 = 0;
+int cpulist_count_3 = 0;
 
 
 void 
@@ -289,10 +297,11 @@ System::printCPUInformation_self(int nomber)
     {
         for (int i = 0; i < numThread; i++) {
 
-            if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
-            else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
-            else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
-            else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
+            if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {
+                threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); cpulist_0[cpulist_count_0] = i; cpulist_count_0++;}
+            else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);  cpulist_1[cpulist_count_1] = i; cpulist_count_1++;}
+            else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);  cpulist_2[cpulist_count_2] = i; cpulist_count_2++;}
+            else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);  cpulist_3[cpulist_count_3] = i; cpulist_count_3++;}
             else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
         }
         for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
@@ -363,11 +372,12 @@ System::partitionFirstFit()
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
-    std::cout << "Best-Fit cpuSet[0].threadCount_self : " << cpuSet[0].threadList << std::endl;
-    std::cout << "Best-Fit cpuSet[1].threadCount_self : " << cpuSet[1].threadList << std::endl;
-    std::cout << "Best-Fit cpuSet[2].threadCount_self : " << cpuSet[2].threadList << std::endl;
-    std::cout << "Best-Fit cpuSet[3].threadCount_self : " << cpuSet[3].threadList << std::endl;
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
+    for (int i = 0; i < 8; i++) { std::cout << "cpulist_0 : " << cpulist_0[i]; }std::cout << "  end" << std::endl;
+    for (int i = 0; i < 8; i++) { std::cout << "cpulist_1 : " << cpulist_1[i]; }std::cout << "  end" << std::endl;
+    for (int i = 0; i < 8; i++) { std::cout << "cpulist_2 : " << cpulist_2[i]; }std::cout << "  end" << std::endl;
+    for (int i = 0; i < 8; i++) { std::cout << "cpulist_3 : " << cpulist_3[i]; }std::cout << "  end" << std::endl;
+
     cleanMultiResult();
     //partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
 }
