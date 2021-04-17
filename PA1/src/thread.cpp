@@ -202,7 +202,7 @@ Thread::matrixMultiplication(void* args)
 #if (PART == 3)
 	    /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
         // Obaserve the execute thread on core-0
-		std::cout << "Core0 start PID - " << obj->PID << std::endl;
+		if (aaa == 0) { std::cout << "Core0 start PID - " << obj->PID << std::endl; aaa = 1; }
 		//std::cout << "Core0 start PID - " << obj->PID<< std::endl;
 		if (obj->PID != syscall(SYS_gettid)) 
 		{
@@ -216,6 +216,7 @@ Thread::matrixMultiplication(void* args)
 	pthread_mutex_lock( &count_Mutex );
     obj->check->checkCorrectness();
 	pthread_mutex_unlock( &count_Mutex );
+	aaa = 0;
     return 0;
 }
 
