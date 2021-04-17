@@ -211,7 +211,6 @@ Thread::matrixMultiplication(void* args)
 		}
 	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #endif
-		aaa = 0;
 	}
 
 	pthread_mutex_lock( &count_Mutex );

@@ -17,27 +17,30 @@ System::System(char* input_file)
     loadInput(input_file); // Set up threadSet, singleResult, multiResult, and matrix
     int init_num = 0;
     int range_num00[4] = { 0,0,0,0 };
-    for (int i = 0; i<numThread; i++) {
+    for (int i = 0; i < numThread; i++) {
 #if (PART == 1)
         // Set the singleResult, multResult, and matrix to thread.
-		threadSet[i].initialThread(singleResult[0], multiResult[0], matrix[0]);
-	    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
+        threadSet[i].initialThread(singleResult[0], multiResult[0], matrix[0]);
+        /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
         // Set up the calculate range of matrix.
         for (int i = 0; i < (threadSet[i].matrixSize() % numThread); i++) { range_num00[i] = 1; }//如果不是4的倍數時，如何平均分配
-        int range_num = (threadSet[i].matrixSize() / numThread)+ range_num00[i];//平均分配所有數量的矩陣
+        int range_num = (threadSet[i].matrixSize() / numThread) + range_num00[i];//平均分配所有數量的矩陣
         threadSet[i].setStartCalculatePoint(init_num);//設定矩陣開始大小
         init_num += range_num;//遞增矩陣需要的編號
         threadSet[i].setEndCalculatePoint(init_num);//設定矩陣結束大小
         //std::cout << "Start : " << init_num- range_num << "\tEnd : " << init_num << std::endl;//檢視想法是否正確
-	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
         // Set the singleResult, multResult, and matrix to thread.
-		threadSet[i].initialThread(singleResult[i], multiResult[i], matrix[i]);
+        threadSet[i].initialThread(singleResult[i], multiResult[i], matrix[i]);
 #endif
 
 #if (PART == 3)
-	    /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
+        /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
         // Set the scheduling policy for thread.
+        for (int i = 0; i < numThread; i++) {
+            threadSet[i].setSchedulingPolicy(0);
+        }   
 	    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #endif
 
