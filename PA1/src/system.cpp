@@ -346,7 +346,7 @@ System::partitionFirstFit()
     // Implement parititon first-fit and print result.
     
     setStartTime();
-    printCPUInformation_self(1);
+    System::printCPUInformation_self(1);
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
@@ -390,7 +390,7 @@ System::partitionBestFit()
     // Implement parititon first-fit and print result.
     setStartTime();
 
-    printCPUInformation_self(2);
+    System::printCPUInformation_self(2);
     for (int i = 0; i < numThread; i++) {
         float cpu_U_0 = cpuSet[0].utilization();
         float cpu_U_1 = cpuSet[1].utilization();
@@ -440,7 +440,7 @@ System::partitionWorstFit()
     // Implement parititon first-fit and print result.
     setStartTime();
 
-    printCPUInformation_self(3);
+    System::printCPUInformation_self(3);
     for (int i = 0; i < numThread; i++) {
         float cpu_U_0 = cpuSet[0].utilization();
         float cpu_U_1 = cpuSet[1].utilization();
