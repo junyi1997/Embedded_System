@@ -48,6 +48,7 @@ class Thread
     int matrixSize () {return _matrixSize;};
     int ID () {return _ID;};
     int schedulingPolicy () {return _schedulingPolicy;};
+    int PID_self() { return PID; };
 
   public:
     pthread_t pthreadThread;
