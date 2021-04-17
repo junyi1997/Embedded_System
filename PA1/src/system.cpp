@@ -280,15 +280,6 @@ System::partitionMultiCoreMatrixMulti()
  * the partition result.
  *
  */
-int cpulist_0[8] = { 0,0,0,0,0,0,0,0 };
-int cpulist_1[8] = { 0,0,0,0,0,0,0,0 };
-int cpulist_2[8] = { 0,0,0,0,0,0,0,0 };
-int cpulist_3[8] = { 0,0,0,0,0,0,0,0 };
-int cpulist_count_0 = 0;
-int cpulist_count_1 = 0;
-int cpulist_count_2 = 0;
-int cpulist_count_3 = 0;
-
 
 void 
 System::printCPUInformation_self(int nomber)
@@ -298,10 +289,10 @@ System::printCPUInformation_self(int nomber)
         for (int i = 0; i < numThread; i++) {
 
             if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {
-                threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); cpulist_0[cpulist_count_0] = i; cpulist_count_0++;}
-            else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);  cpulist_1[cpulist_count_1] = i; cpulist_count_1++;}
-            else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);  cpulist_2[cpulist_count_2] = i; cpulist_count_2++;}
-            else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);  cpulist_3[cpulist_count_3] = i; cpulist_count_3++;}
+                threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
+            else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
+            else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
+            else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
             else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
         }
         for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
