@@ -360,11 +360,12 @@ System::partitionFirstFit()
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        if (i == 0) { &threadSet[i].checkpoint = 0; }
+        //if (i == 0) { &threadSet[i].checkpoint = 0; }
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    std::cout << "Core0 start PID - " << &threadSet[0].PID << std::endl;
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
     cleanMultiResult();
@@ -408,11 +409,11 @@ System::partitionBestFit()
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 >= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 ) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        if (i == 0) { &threadSet[i].checkpoint = 0; }
+        //if (i == 0) { &threadSet[i].checkpoint = 0; }
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-    
+    std::cout << "Core0 start PID - " << &threadSet[0].PID << std::endl;
     setEndTime();
     
     //cpuSet[0].threadList
@@ -458,9 +459,11 @@ System::partitionWorstFit()
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 <= cpu_U_1 && cpu_U_2 <= cpu_U_0 && cpu_U_2 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 && cpu_U_3 <= cpu_U_1 && cpu_U_3 <= cpu_U_2 && cpu_U_3 <= cpu_U_0) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        if (i == 0) { &threadSet[i].checkpoint = 0; }
+        //if (i == 0) { &threadSet[i].checkpoint = 0; }
     }
+    
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
+    std::cout << "Core0 start PID - " << &threadSet[0].PID << std::endl;
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
