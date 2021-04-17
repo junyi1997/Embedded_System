@@ -359,9 +359,10 @@ System::partitionFirstFit()
 
 	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
     // Implement parititon first-fit and print result.
-    
     setStartTime();
     System::printCPUInformation_self(1);//顯示CPU分配狀態
+#if (PART == 2)
+    
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
@@ -370,13 +371,24 @@ System::partitionFirstFit()
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
+#endif 
+    /*
+    #if (PART == 3)
+    for (int i = 0; i < 8; i++) {
+        if (cpulist_0[i] != 0 && i != 1) {}
+        pthread_join(threadSet[i].pthreadThread, NULL);
+    }
+    for (int i = 0; i < numThread; i++) {  }
+    #endif  
+    */
+   
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
-    std::cout << "cpulist_0 : "; for (int i = 0; i < 8; i++) { if (cpulist_0[i] != 0) { std::cout << cpulist_0[i] << "  "; } }std::cout << "  end" << std::endl;
-    std::cout << "cpulist_1 : "; for (int i = 0; i < 8; i++) { if (cpulist_1[i] != 0) { std::cout << cpulist_1[i] << "  "; } }std::cout << "  end" << std::endl;
-    std::cout << "cpulist_2 : "; for (int i = 0; i < 8; i++) { if (cpulist_2[i] != 0) { std::cout << cpulist_2[i] << "  "; } }std::cout << "  end" << std::endl;
-    std::cout << "cpulist_3 : "; for (int i = 0; i < 8; i++) { if (cpulist_3[i] != 0) { std::cout << cpulist_3[i] << "  "; } }std::cout << "  end" << std::endl;
+    std::cout << "cpulist_0 : "; for (int i = 0; i < 8; i++) { if (cpulist_0[i] != 0 && i != 1) {std::cout << cpulist_0[i] << "  ";} }std::cout << "  end" << std::endl;
+    std::cout << "cpulist_1 : "; for (int i = 0; i < 8; i++) { if (cpulist_1[i] != 0 && i != 1) {std::cout << cpulist_1[i] << "  ";}  }std::cout << "  end" << std::endl;
+    std::cout << "cpulist_2 : "; for (int i = 0; i < 8; i++) { if (cpulist_2[i] != 0 && i != 1) {std::cout << cpulist_2[i] << "  ";} }std::cout << "  end" << std::endl;
+    std::cout << "cpulist_3 : "; for (int i = 0; i < 8; i++) { if (cpulist_3[i] != 0 && i != 1) {std::cout << cpulist_3[i] << "  ";} }std::cout << "  end" << std::endl;
     cleanMultiResult();
     //partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
 }
