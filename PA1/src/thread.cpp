@@ -157,7 +157,7 @@ Thread::singleMatrixMultiplication()
  *
  */
 
-int aaa = syscall(SYS_gettid);
+int aaa = 0;
 
 void*
 Thread::matrixMultiplication(void* args)
@@ -193,8 +193,9 @@ Thread::matrixMultiplication(void* args)
 				// Observe the thread migration 
 				if (obj->core != sched_getcpu())
 				{
-					std::cout << "The thread " << obj->_ID << " PID : " << obj->PID << " is move from CPU " << obj->core << " to " << sched_getcpu() << std::endl;
-					obj->core = sched_getcpu();
+					if (aaa == 0) { std::cout << "Core0 start PID - " << sched_getcpu() << std::endl; }
+					std::cout << "The thread " << obj->_ID << " PID : " << aaa << " is move from CPU " << obj->core << " to " << sched_getcpu() << std::endl;
+					aaa = sched_getcpu();
 				}
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 			#endif
@@ -203,11 +204,11 @@ Thread::matrixMultiplication(void* args)
 #if (PART == 3)
 		/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 		// Obaserve the execute thread on core-0
-		
+
 		if (obj->PID != syscall(SYS_gettid))
 		{
-			std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << syscall(SYS_gettid) << std::endl;
-			aaa = syscall(SYS_gettid);
+			std::cout << "Core0 context switch from PID - " << obj->PID << " to PID - " << syscall(SYS_gettid) << std::endl;
+			obj->PID = syscall(SYS_gettid);
 		}
 		/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #endif
