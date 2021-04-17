@@ -360,7 +360,6 @@ System::partitionBestFit()
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 >= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
         else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
-        else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
     }
     for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
     for (int i = 0; i < CORE_NUM; i++)
@@ -423,7 +422,6 @@ System::partitionWorstFit()
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_1 <= cpu_U_0 && cpu_U_1 <= cpu_U_2 && cpu_U_1 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 <= cpu_U_1 && cpu_U_2 <= cpu_U_0 && cpu_U_2 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 && cpu_U_3 <= cpu_U_1 && cpu_U_3 <= cpu_U_2 && cpu_U_3 <= cpu_U_0) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
-        else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
         else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
     }
     for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
