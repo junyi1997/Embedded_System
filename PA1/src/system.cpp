@@ -280,6 +280,8 @@ System::partitionMultiCoreMatrixMulti()
  * the partition result.
  *
  */
+
+
 void 
 System::printCPUInformation_self(int nomber)
 {
@@ -409,6 +411,8 @@ System::partitionBestFit()
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
+    std::cout << "Best-Fit cpuSet[0].threadList : " << cpuSet[0].threadList << std::endl;
+    //cpuSet[0].threadList
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
     cleanMultiResult();
     //partitionMultiCoreMatrixMulti(); // Create the multi-thread matrix multiplication
