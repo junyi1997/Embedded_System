@@ -168,7 +168,7 @@ Thread::matrixMultiplication(void* args)
 	
 #if (PART == 3)
     obj->setUpScheduler();
-	if (bbb > 10) { bbb++; }
+	if (bbb < 10) { bbb++; }
 	else { bbb = 0; }
 #endif
 
