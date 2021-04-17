@@ -191,27 +191,26 @@ Thread::matrixMultiplication(void* args)
 			#if (PART == 1)
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				// Observe the thread migration 
-			    if (aaa == 0) { std::cout << "Core0 start PID - " << sched_getcpu() << std::endl; aaa = sched_getcpu();}
 				if (obj->core != sched_getcpu())
 				{
-					std::cout << "The thread " << obj->_ID << " PID : " << aaa << " is move from CPU " << obj->core << " to " << sched_getcpu() << std::endl;
-					aaa = sched_getcpu();
+					std::cout << "The thread " << obj->_ID << " PID : " << obj->PID << " is move from CPU " << obj->core << " to " << sched_getcpu() << std::endl;
+					obj->core = sched_getcpu();
 				}
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 			#endif
 
 		}
-#if (PART == 3)
-		/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
-		// Obaserve the execute thread on core-0
-
-		if (obj->PID != syscall(SYS_gettid))
-		{
-			std::cout << "Core0 context switch from PID - " << obj->PID << " to PID - " << syscall(SYS_gettid) << std::endl;
-			obj->PID = syscall(SYS_gettid);
-		}
-		/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-#endif
+			#if (PART == 3)
+			/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
+			// Obaserve the execute thread on core-0
+		        if (aaa == 0) { std::cout << "Core0 start PID - " << syscall(SYS_gettid) << std::endl; }
+				if (obj->PID != syscall(SYS_gettid))
+				{
+					std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << syscall(SYS_gettid) << std::endl;
+					aaa = syscall(SYS_gettid);
+				}
+				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+			#endif
 	}
 
 	pthread_mutex_lock( &count_Mutex );
