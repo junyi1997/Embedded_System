@@ -191,9 +191,10 @@ Thread::matrixMultiplication(void* args)
 			#if (PART == 1)
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				// Observe the thread migration 
+			    if (aaa == 0) { std::cout << "Core0 start PID - " << sched_getcpu() << std::endl; aaa = sched_getcpu();}
 				if (obj->core != sched_getcpu())
 				{
-					if (aaa == 0) { std::cout << "Core0 start PID - " << sched_getcpu() << std::endl; }
+					
 					std::cout << "The thread " << obj->_ID << " PID : " << aaa << " is move from CPU " << obj->core << " to " << sched_getcpu() << std::endl;
 					aaa = sched_getcpu();
 				}
