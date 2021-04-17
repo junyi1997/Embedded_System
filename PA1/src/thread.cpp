@@ -158,11 +158,11 @@ Thread::singleMatrixMultiplication()
  */
 
 
-
+int aaa = 0;
 void*
 Thread::matrixMultiplication(void* args)
 {
-    int aaa = 0;
+    
     Thread *obj = (Thread*)args;
 	
 #if (PART == 3)
