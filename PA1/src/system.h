@@ -39,6 +39,7 @@ class System
     void partitionFirstFit ();
     void partitionBestFit ();
     void partitionWorstFit ();
+    void printCPUInformation_self(int)
 
     void cleanMultiResult (); // Clear the result store in multiResutl
     void setStartTime ();
