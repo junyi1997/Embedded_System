@@ -411,7 +411,7 @@ System::partitionBestFit()
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
-    std::cout << "Best-Fit cpuSet[0].threadList : " << cpuSet[0].threadList << std::endl;
+    std::cout << "Best-Fit cpuSet[0].threadCount_self : " << cpuSet[0].threadCount_self << std::endl;
     //cpuSet[0].threadList
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
     cleanMultiResult();
