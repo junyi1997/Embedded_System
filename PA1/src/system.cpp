@@ -286,12 +286,25 @@ System::partitionFirstFit()
     check->setCheckState(PARTITION_FF);
 #endif
 
+
 	for (int i = 0; i < CORE_NUM; i++)
 		cpuSet[i].emptyCPU(); // Reset the CPU set
 
 	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
     // Implement parititon first-fit and print result.
+    
     setStartTime();
+    for (int i = 0; i < numThread; i++) {
+
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
+        else { std::cout << "Thread-" << i << " is no schedulable" << std::endl; }
+    }
+    for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
+    for (int i = 0; i < CORE_NUM; i++)
+        cpuSet[i].emptyCPU(); // Reset the CPU set
     for (int i = 0; i < numThread; i++) {
 
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
@@ -302,8 +315,7 @@ System::partitionFirstFit()
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         
     }
-    for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
-    //for (int i = 0; i < numThread; i++) { pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
+    //for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
