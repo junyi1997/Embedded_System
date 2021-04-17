@@ -201,11 +201,10 @@ Thread::matrixMultiplication(void* args)
 			#if (PART == 3)
 			/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 			// Obaserve the execute thread on core-0
-			//if (obj->checkpoint == 0) { std::cout << "Core0 start PID - " << obj->PID << std::endl;  obj->checkpoint = 1; }
-			//std::cout << "Core0 start PID - " << obj->PID<< std::endl;
+
 				if (obj->PID != syscall(SYS_gettid))
 				{
-					std::cout << "Core0 context switch from PID - " << obj->PID << " to " << syscall(SYS_gettid) << std::endl;
+					std::cout << "Core0 context switch from PID - " << obj->PID << " to PID - " << syscall(SYS_gettid) << std::endl;
 					obj->PID = syscall(SYS_gettid);
 				}
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
