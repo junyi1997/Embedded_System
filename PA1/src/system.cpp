@@ -330,6 +330,7 @@ System::printCPUInformation_self(int nomber)
     }
 
 }
+
 void
 System::partitionFirstFit()
 {
@@ -346,7 +347,7 @@ System::partitionFirstFit()
     // Implement parititon first-fit and print result.
     
     setStartTime();
-    System::printCPUInformation_self(1);
+    System::printCPUInformation_self(1);//顯示CPU分配狀態
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
@@ -354,7 +355,6 @@ System::partitionFirstFit()
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
-    //for (int i = 0; i < CORE_NUM; i++) {cpuSet[i].printCPUInformation();}
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
@@ -390,7 +390,7 @@ System::partitionBestFit()
     // Implement parititon first-fit and print result.
     setStartTime();
 
-    System::printCPUInformation_self(2);
+    System::printCPUInformation_self(2);//顯示CPU分配狀態
     for (int i = 0; i < numThread; i++) {
         float cpu_U_0 = cpuSet[0].utilization();
         float cpu_U_1 = cpuSet[1].utilization();
@@ -403,8 +403,6 @@ System::partitionBestFit()
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
 
     }
-    //for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
-    //for (int i = 0; i < numThread; i++) { pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
@@ -440,7 +438,7 @@ System::partitionWorstFit()
     // Implement parititon first-fit and print result.
     setStartTime();
 
-    System::printCPUInformation_self(3);
+    System::printCPUInformation_self(3);//顯示CPU分配狀態
     for (int i = 0; i < numThread; i++) {
         float cpu_U_0 = cpuSet[0].utilization();
         float cpu_U_1 = cpuSet[1].utilization();
@@ -451,10 +449,7 @@ System::partitionWorstFit()
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 <= cpu_U_1 && cpu_U_2 <= cpu_U_0 && cpu_U_2 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 && cpu_U_3 <= cpu_U_1 && cpu_U_3 <= cpu_U_2 && cpu_U_3 <= cpu_U_0) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-
     }
-    //for (int i = 0; i < CORE_NUM; i++) { cpuSet[i].printCPUInformation(); }
-    //for (int i = 0; i < numThread; i++) { pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]); }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
