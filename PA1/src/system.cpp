@@ -344,6 +344,7 @@ System::partitionFirstFit()
     check->setCheckState(PARTITION_FF);
 #endif
 
+
 	for (int i = 0; i < CORE_NUM; i++)
 		cpuSet[i].emptyCPU(); // Reset the CPU set
 
@@ -354,18 +355,17 @@ System::partitionFirstFit()
 
     
     for (int i = 0; i < numThread; i++) {
-        
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        //if (i == 0) { &threadSet[i].checkpoint = 0; }
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+#endif
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-    std::cout << "Core0 start PID - " << &threadSet[0].PID << std::endl;
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
     cleanMultiResult();
@@ -409,11 +409,14 @@ System::partitionBestFit()
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 >= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 ) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        //if (i == 0) { &threadSet[i].checkpoint = 0; }
+
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+#endif
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-    std::cout << "Core0 start PID - " << &threadSet[0].PID << std::endl;
+    
     setEndTime();
     
     //cpuSet[0].threadList
@@ -459,11 +462,11 @@ System::partitionWorstFit()
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 <= cpu_U_1 && cpu_U_2 <= cpu_U_0 && cpu_U_2 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 && cpu_U_3 <= cpu_U_1 && cpu_U_3 <= cpu_U_2 && cpu_U_3 <= cpu_U_0) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        //if (i == 0) { &threadSet[i].checkpoint = 0; }
     }
-    
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-    std::cout << "Core0 start PID - " << &threadSet[0].PID << std::endl;
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+#endif
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;

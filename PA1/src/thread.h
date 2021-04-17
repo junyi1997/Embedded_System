@@ -48,6 +48,7 @@ class Thread
     int matrixSize () {return _matrixSize;};
     int ID () {return _ID;};
     int schedulingPolicy () {return _schedulingPolicy;};
+    int PID_self() { return PID; };
 
   public:
     pthread_t pthreadThread;
@@ -66,7 +67,6 @@ class Thread
 	float **matrix;              // 2-D matrix
 	float **singleResult;        // Store the single-core matrix multiplication result
 	float **multiResult;		 // Store the multi-core matrix multiplication result
-    int checkpoint;
 
     Check *check;
 };
