@@ -18,7 +18,7 @@ class CPU
     
     float utilization () {return _utilization;};
     int cpuId () {return _cpuId;};
-	int threadList() { return *threadList; };
+	int threadCount_self() { return threadCount; };
 
   private:
 	int *threadList ;      // List of thread in this cpu
