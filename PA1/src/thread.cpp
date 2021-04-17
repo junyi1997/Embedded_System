@@ -253,7 +253,14 @@ Thread::setUpScheduler()
     // Set up the scheduler for current thread 為當前線程設置調度程序
     #include <sched.h>
 	struct sched_param sp;
-	sp.sched_priority = sched_get_priority_max(SCHED_FIFO); 
-	ret = sched_setscheduler(0, SCHED_FIFO, &sp);
+	#if (SCHEDULING == SCHED_RR)
+		sp.sched_priority = sched_get_priority_max(SCHED_RR);
+		ret = sched_setscheduler(0, SCHED_RR, &sp);
+	#endif
+	#if (SCHEDULING == SCHED_FIFO)
+		sp.sched_priority = sched_get_priority_max(SCHED_FIFO);
+		ret = sched_setscheduler(0, SCHED_FIFO, &sp);
+	#endif
+	
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
