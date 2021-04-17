@@ -187,14 +187,17 @@ Thread::matrixMultiplication(void* args)
 			for (int k = 0 ; k < obj->_matrixSize; k++) {
 				obj->multiResult[i][j] += obj->matrix[i][k] * obj->matrix[k][j];
             }	
-	        /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-            // Observe the thread migration 
-			if (obj->core != sched_getcpu())
-			{
-				std::cout << "The thread " << obj->_ID << " PID : " << obj->PID << " is move from CPU " << obj->core << " to " << sched_getcpu() << std::endl;
-				obj->core = sched_getcpu();
-			}
-	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+			#if (PART == 1)
+				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
+				// Observe the thread migration 
+				if (obj->core != sched_getcpu())
+				{
+					std::cout << "The thread " << obj->_ID << " PID : " << obj->PID << " is move from CPU " << obj->core << " to " << sched_getcpu() << std::endl;
+					obj->core = sched_getcpu();
+				}
+				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+			#endif
+	        
 		}
 #if (PART == 3)
 	    /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
