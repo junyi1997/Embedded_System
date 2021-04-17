@@ -352,7 +352,9 @@ System::partitionFirstFit()
     // Implement parititon first-fit and print result.
     setStartTime();
     System::printCPUInformation_self(1);//顯示CPU分配狀態
-
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+#endif
     
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
@@ -362,9 +364,7 @@ System::partitionFirstFit()
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-#if (PART == 3)
-    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
-#endif
+
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
@@ -399,6 +399,9 @@ System::partitionBestFit()
     setStartTime();
 
     System::printCPUInformation_self(2);//顯示CPU分配狀態
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+#endif
     for (int i = 0; i < numThread; i++) {
         float cpu_U_0 = cpuSet[0].utilization();
         float cpu_U_1 = cpuSet[1].utilization();
@@ -412,9 +415,7 @@ System::partitionBestFit()
 
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-#if (PART == 3)
-    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
-#endif
+
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     
     setEndTime();
@@ -452,6 +453,9 @@ System::partitionWorstFit()
     setStartTime();
 
     System::printCPUInformation_self(3);//顯示CPU分配狀態
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+#endif
     for (int i = 0; i < numThread; i++) {
         float cpu_U_0 = cpuSet[0].utilization();
         float cpu_U_1 = cpuSet[1].utilization();
@@ -464,9 +468,7 @@ System::partitionWorstFit()
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-#if (PART == 3)
-    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
-#endif
+
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
