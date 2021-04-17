@@ -400,7 +400,7 @@ System::partitionBestFit()
 
     System::printCPUInformation_self(2);//顯示CPU分配狀態
 #if (PART == 3)
-    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self()+1 << std::endl;
 #endif
     for (int i = 0; i < numThread; i++) {
         float cpu_U_0 = cpuSet[0].utilization();
