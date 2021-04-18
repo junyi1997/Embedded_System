@@ -372,6 +372,10 @@ System::partitionFirstFit()
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
     for (int i = 0; i < numThread; i++) { if (i == 0) { std::cout << aaaaa[i] << " "; }if (aaaaa[i] != 0) { std::cout << aaaaa[i] << " "; } }std::cout << " " << std::endl;
+    std::cout << "Core0 start PID - " << threadSet[aaaaa[0]].PID_self() << std::endl; aaa = threadSet[aaaaa[0]].PID_self();
+    for (int i = 0; i < numThread; i++) { if (aaaaa[i] != 0) { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[aaaaa[i]].PID_self() << std::endl; aaa = threadSet[aaaaa[i]].PID_self();
+    } }
+
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
