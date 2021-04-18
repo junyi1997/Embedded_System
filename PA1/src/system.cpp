@@ -354,14 +354,14 @@ System::partitionFirstFit()
 //#if (PART == 3)
 //    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
 //#endif
-    int aaa = 0;
+    int aaa = 0,aaaa=0;
     for (int i = 0; i < numThread; i++) {
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
-        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
-        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
-        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); aaaa = 1; }
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); aaaa = 0;}
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); aaaa = 0;}
+        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); aaaa = 0;}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {
+        if (aaaa == 1) {
             std::cout << "i - " << i << std::endl;
             #if (PART == 3)
             if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
