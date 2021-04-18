@@ -362,11 +362,11 @@ System::partitionFirstFit()
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); aaaa = 0;}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         if (aaaa == 1) {
-            std::cout << "i - " << i << std::endl;
             #if (PART == 3)
-            if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
-            else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
-            aaa = threadSet[i].PID_self();
+                std::cout << "i - " << i << std::endl;
+                if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
+                else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
+                aaa = threadSet[i].PID_self();
             #endif
         }
     }
