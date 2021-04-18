@@ -354,24 +354,24 @@ System::partitionFirstFit()
 //#if (PART == 3)
 //    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
 //#endif
-    int aaa = 0,aaaa=0;
+    int aaa = 0, aaaa = 0, aaaaa[10] = {0,0,0,0,0,0,0,0,0,0};
     for (int i = 0; i < numThread; i++) {
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); aaaa = 1; }
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); aaaaa[aaaa] = i; aaaa++; }
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); aaaa = 0;}
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); aaaa = 0;}
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); aaaa = 0;}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        if (aaaa == 1) {
-            #if (PART == 3)
-                std::cout << "i - " << i << std::endl;
-                if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
-                else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
-                aaa = threadSet[i].PID_self();
-            #endif
-        }
+        //if (aaaa == 1) {
+        //    #if (PART == 3)
+        //        std::cout << "i - " << i << std::endl;
+        //        if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
+        //        else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
+        //        aaa = threadSet[i].PID_self();
+        //    #endif
+        //}
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-
+    for (int i = 0; i < numThread; i++) { std::cout << "i - " << aaaaa[i] << std::endl; }
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
