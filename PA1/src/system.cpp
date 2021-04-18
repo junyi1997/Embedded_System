@@ -356,18 +356,19 @@ System::partitionFirstFit()
 //#endif
     int aaa = 0;
     for (int i = 0; i < numThread; i++) {
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {
+            threadSet[i].setUpCPUAffinityMask(0); 
+            cpuSet[0].pushThreadToCPU(&threadSet[i]);
+            #if (PART == 3)
+                if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
+                else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
+                aaa = threadSet[i].PID_self();
+            #endif
+        }
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {
-            #if (PART == 3)
-            if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
-            else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
-            aaa = threadSet[i].PID_self();
-            #endif
-        }
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 
@@ -414,18 +415,19 @@ System::partitionBestFit()
         float cpu_U_1 = cpuSet[1].utilization();
         float cpu_U_2 = cpuSet[2].utilization();
         float cpu_U_3 = cpuSet[3].utilization();
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 >= cpu_U_1 && cpu_U_0 >= cpu_U_2 && cpu_U_0 >= cpu_U_3) {threadSet[i].setUpCPUAffinityMask(0);cpuSet[0].pushThreadToCPU(&threadSet[i]); }
-        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_1 >= cpu_U_2 && cpu_U_1 >= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
-        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 >= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
-        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 ) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
-        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 >= cpu_U_1 && cpu_U_0 >= cpu_U_2 && cpu_U_0 >= cpu_U_3) {
+            threadSet[i].setUpCPUAffinityMask(0);
+            cpuSet[0].pushThreadToCPU(&threadSet[i]); 
             #if (PART == 3)
                 if (bbb == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
                 else { std::cout << "Core0 context switch from PID - " << bbb << " to PID - " << threadSet[i].PID_self() << std::endl; }
                 bbb = threadSet[i].PID_self();
             #endif
         }
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_1 >= cpu_U_2 && cpu_U_1 >= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 >= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 ) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
+        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 
@@ -475,18 +477,19 @@ System::partitionWorstFit()
         float cpu_U_1 = cpuSet[1].utilization();
         float cpu_U_2 = cpuSet[2].utilization();
         float cpu_U_3 = cpuSet[3].utilization();
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 <= cpu_U_1 && cpu_U_0 <= cpu_U_2 && cpu_U_0 <= cpu_U_3) {threadSet[i].setUpCPUAffinityMask(0);cpuSet[0].pushThreadToCPU(&threadSet[i]);}
-        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_1 <= cpu_U_0 && cpu_U_1 <= cpu_U_2 && cpu_U_1 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
-        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 <= cpu_U_1 && cpu_U_2 <= cpu_U_0 && cpu_U_2 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
-        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 && cpu_U_3 <= cpu_U_1 && cpu_U_3 <= cpu_U_2 && cpu_U_3 <= cpu_U_0) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
-        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 <= cpu_U_1 && cpu_U_0 <= cpu_U_2 && cpu_U_0 <= cpu_U_3) {
+            threadSet[i].setUpCPUAffinityMask(0);
+            cpuSet[0].pushThreadToCPU(&threadSet[i]);
             #if (PART == 3)
                 if (ccc == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
                 else { std::cout << "Core0 context switch from PID - " << ccc << " to PID - " << threadSet[i].PID_self() << std::endl; }
                 ccc = threadSet[i].PID_self();
             #endif
         }
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1 && cpu_U_1 <= cpu_U_0 && cpu_U_1 <= cpu_U_2 && cpu_U_1 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1 && cpu_U_2 <= cpu_U_1 && cpu_U_2 <= cpu_U_0 && cpu_U_2 <= cpu_U_3) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1 && cpu_U_3 <= cpu_U_1 && cpu_U_3 <= cpu_U_2 && cpu_U_3 <= cpu_U_0) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
+        pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 
