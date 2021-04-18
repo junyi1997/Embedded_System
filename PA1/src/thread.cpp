@@ -158,7 +158,6 @@ Thread::singleMatrixMultiplication()
  */
 
 
-int aaa = 0;
 void*
 Thread::matrixMultiplication(void* args)
 {
