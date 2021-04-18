@@ -360,7 +360,7 @@ System::partitionFirstFit()
             threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);
             #if (PART == 3)
                 //std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl;
-                std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl;
+                std::cout << "Core0 context switch from PID - " << i << " to PID - " << threadSet[i].PID_self() << std::endl;
                 aaa = threadSet[i].PID_self();
             #endif
         }
@@ -419,7 +419,7 @@ System::partitionBestFit()
             cpuSet[0].pushThreadToCPU(&threadSet[i]); 
             #if (PART == 3)
                 //std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl;
-                std::cout << "Core0 context switch from PID - " << bbb << " to PID - " << threadSet[i].PID_self() << std::endl;
+                std::cout << "Core0 context switch from PID - " << i << " to PID - " << threadSet[i].PID_self() << std::endl;
                 bbb = threadSet[i].PID_self();
             #endif
         }
@@ -482,7 +482,7 @@ System::partitionWorstFit()
             cpuSet[0].pushThreadToCPU(&threadSet[i]); 
             #if (PART == 3)
                 //std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl;
-                std::cout << "Core0 context switch from PID - " << ccc << " to PID - " << threadSet[i].PID_self() << std::endl;
+                std::cout << "Core0 context switch from PID - " << i << " to PID - " << threadSet[i].PID_self() << std::endl;
                 ccc = threadSet[i].PID_self();
             #endif
         }
