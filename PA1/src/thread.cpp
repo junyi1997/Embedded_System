@@ -174,11 +174,10 @@ Thread::matrixMultiplication(void* args)
 	obj->setUpCPUAffinityMask(sched_getcpu());
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 	/* Print Thread information */
-#if (PART != 3)
 	obj->core = sched_getcpu();
 	obj->PID = syscall(SYS_gettid);
+#if (PART != 3)
 	obj->printInformation();
-
 #endif
 	
     /* matrix multiplication */
