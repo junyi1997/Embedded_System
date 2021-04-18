@@ -358,7 +358,7 @@ System::partitionFirstFit()
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { 
             threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);
-            pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
+            //pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
             #if (PART == 3)
                 //std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl;
                 std::cout << "Core0 context switch from PID - " << i << " to PID - " << threadSet[i].PID_self() << std::endl;
