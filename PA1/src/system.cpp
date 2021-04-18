@@ -280,7 +280,7 @@ System::partitionMultiCoreMatrixMulti()
  * the partition result.
  *
  */
-int aaa = 0, aaaa = 0, aaaaa[10] = { 0,0,0,0,0,0,0,0,0,0 };
+
 void 
 System::printCPUInformation_self(int nomber)
 {
@@ -288,7 +288,7 @@ System::printCPUInformation_self(int nomber)
     {
         for (int i = 0; i < numThread; i++) {
 
-            if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); aaaaa[aaaa] = i; aaaa++;}
+            if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
             else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
             else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
             else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
@@ -351,24 +351,21 @@ System::partitionFirstFit()
     // Implement parititon first-fit and print result.
     setStartTime();
     System::printCPUInformation_self(1);//顯示CPU分配狀態
-#if (PART == 3)
-    std::cout << "Core0 start PID - " << threadSet[aaaaa[0]].PID_self() << std::endl; aaa = threadSet[aaaaa[0]].PID_self();
-    for (int i = 0; i < numThread; i++) {
-        if (aaaaa[i] != 0) {
-            std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[aaaaa[i]].PID_self() << std::endl; aaa = threadSet[aaaaa[i]].PID_self();
-#endif
 //#if (PART == 3)
 //    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
 //#endif
-    
+    int aaa = 0, aaaa = 0, aaaaa[10] = {0,0,0,0,0,0,0,0,0,0};
     for (int i = 0; i < numThread; i++) {
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);}
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); aaaaa[aaaa] = i; aaaa++; }
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
-
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[aaaaa[0]].PID_self() << std::endl; aaa = threadSet[aaaaa[0]].PID_self();
+    for (int i = 0; i < numThread; i++) { if (aaaaa[i] != 0) { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[aaaaa[i]].PID_self() << std::endl; aaa = threadSet[aaaaa[i]].PID_self();
+#endif
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 
     } }
