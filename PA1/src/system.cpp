@@ -362,12 +362,12 @@ System::partitionFirstFit()
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
     }
+
+    for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 #if (PART == 3)
     std::cout << "Core0 start PID - " << threadSet[aaaaa[0]].PID_self() << std::endl; aaa = threadSet[aaaaa[0]].PID_self();
     for (int i = 0; i < numThread; i++) { if (aaaaa[i] != 0) { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[aaaaa[i]].PID_self() << std::endl; aaa = threadSet[aaaaa[i]].PID_self();
 #endif
-    for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-
     } }
 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
