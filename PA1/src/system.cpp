@@ -371,7 +371,7 @@ System::partitionFirstFit()
         //}
     }
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-    for (int i = 0; i < numThread; i++) { std::cout << "i - " << aaaaa[i] << "   "; }std::cout << " " <<std::endl;
+    for (int i = 0; i < numThread; i++) { if (i != 0 && aaaaa[i] != 0) { std::cout << aaaaa[i] << " "; } }std::cout << " " << std::endl;
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
     std::cout << "Partition Multi Thread Spend time : " << _timeUse << std::endl;
