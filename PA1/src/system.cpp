@@ -365,7 +365,7 @@ System::partitionFirstFit()
 
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 #if (PART == 3)
-    std::cout << "Core0 start PID - " << threadSet[aaaaa[0]].PID_self() << std::endl; aaa = threadSet[aaaaa[0]].PID_self();
+    std::cout << "Core0 start PID - " << threadSet[aTID[0]].PID_self() << std::endl; aaa = threadSet[aTID[0]].PID_self();
     for (int i = 0; i < numThread; i++) { if (aTID[i] != 0) { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[aTID[i]].PID_self() << std::endl; aaa = threadSet[aTID[i]].PID_self();
 #endif
     } }
