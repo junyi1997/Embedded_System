@@ -359,6 +359,7 @@ System::partitionFirstFit()
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { 
             threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]);
             #if (PART == 3)
+                pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
                 if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
                 else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
                 aaa = threadSet[i].PID_self();
@@ -418,6 +419,7 @@ System::partitionBestFit()
             threadSet[i].setUpCPUAffinityMask(0); 
             cpuSet[0].pushThreadToCPU(&threadSet[i]); 
             #if (PART == 3)
+                pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
                 if (bbb == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
                 else { std::cout << "Core0 context switch from PID - " << bbb << " to PID - " << threadSet[i].PID_self() << std::endl; }
                 bbb = threadSet[i].PID_self();
@@ -481,6 +483,7 @@ System::partitionWorstFit()
             threadSet[i].setUpCPUAffinityMask(0); 
             cpuSet[0].pushThreadToCPU(&threadSet[i]); 
             #if (PART == 3)
+                pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
                 if (ccc == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
                 else { std::cout << "Core0 context switch from PID - " << ccc << " to PID - " << threadSet[i].PID_self() << std::endl; }
                 ccc = threadSet[i].PID_self();
