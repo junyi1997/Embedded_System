@@ -370,7 +370,6 @@ System::partitionFirstFit()
     }
 
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-    } }
 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
