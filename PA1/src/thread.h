@@ -16,7 +16,6 @@
 #include "config.h"
 #include "../libs/check.h"
 
-#include "cpu.h"
 
 static pthread_mutex_t count_Mutex;	// pthread lock variable
 static int current_PID = -1;
@@ -70,7 +69,6 @@ class Thread
 	float **singleResult;        // Store the single-core matrix multiplication result
 	float **multiResult;		 // Store the multi-core matrix multiplication result
 
-    CPU* cpuSet;               // list of cpu
 
     Check *check;
 };

@@ -199,7 +199,7 @@ Thread::matrixMultiplication(void* args)
 
 		}
 		#if (PART == 3)
-			cpuSet = new CPU[CORE_NUM];
+			//cpuSet = new CPU[CORE_NUM];
 			/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 			// Obaserve the execute thread on core-0
 			//if (aaa == 0) { std::cout << "Core0 start PID - " << syscall(SYS_gettid) << std::endl; aaa = syscall(SYS_gettid);}
@@ -208,7 +208,7 @@ Thread::matrixMultiplication(void* args)
 			//	std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << syscall(SYS_gettid) << std::endl;
 			//	aaa = syscall(SYS_gettid);
 			//}
-		    cpuSet[0].printCPU0Information();
+		    //cpuSet[0].printCPU0Information();
 			/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 		#endif
 	}
