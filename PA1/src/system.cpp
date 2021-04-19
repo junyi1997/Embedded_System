@@ -422,8 +422,9 @@ System::partitionBestFit()
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1 && cpu_U_0 >= cpu_U_1 && cpu_U_0 >= cpu_U_2 && cpu_U_0 >= cpu_U_3) {
             #if (PART == 3)
                 if (bbb == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
-                std::cout << "Core0 context switch from PID - " << bbb << " to PID - " << threadSet[i].PID_self() << std::endl;
                 bbb = threadSet[i].PID_self();
+                std::cout << "Core0 context switch from PID - " << bbb << " to PID - " << threadSet[i].PID_self() << std::endl;
+                
             #endif
         }
     }
