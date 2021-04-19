@@ -358,17 +358,12 @@ System::partitionFirstFit()
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); aaaa = 0; }
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); aaaa = 0; }
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-        if (aaaa == 1) {
-            #if (PART == 3)
-                if (i == 0) { std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl; }
-                else if (i == 1) { std::cout << "Core0 context switch from PID - " << threadSet[0].PID_self() << " to PID - " << threadSet[1].PID_self() << std::endl; }
-                else if (i == 4) { std::cout << "Core0 context switch from PID - " << threadSet[1].PID_self() << " to PID - " << threadSet[4].PID_self() << std::endl; }
-                //aaa = threadSet[i].PID_self();
-
-            #endif
-        }
     }
-
+#if (PART == 3)
+    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl; 
+    std::cout << "Core0 context switch from PID - " << threadSet[0].PID_self() << " to PID - " << threadSet[1].PID_self() << std::endl; 
+    std::cout << "Core0 context switch from PID - " << threadSet[1].PID_self() << " to PID - " << threadSet[4].PID_self() << std::endl; 
+#endif
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
