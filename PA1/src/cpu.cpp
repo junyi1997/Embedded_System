@@ -69,7 +69,7 @@ CPU::printCPU0Information(Thread* thread)
 
 	threadList[threadCount] = thread->ID();
 	//std::cout << "threadList[threadCount] = " << threadList[threadCount] << std::endl;
-	cpu0aaa= threadList[threadCount]
+	cpu0aaa = threadList[threadCount];
 	//if (threadCount == 0) { std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl; aaa = threadSet[0].PID_self(); }
 	//threadCount++;
 }
