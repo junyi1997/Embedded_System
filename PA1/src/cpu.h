@@ -25,7 +25,7 @@ class CPU
 	int threadCount;       // Number of theread in this cpu
 	int _cpuId;            // CPU id whic used assign
 	float _utilization;    // Utilization of this cpu
-	int cpu0aaa
+	int cpu0aaa;
 
 };
 #endif
