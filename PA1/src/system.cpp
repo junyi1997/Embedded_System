@@ -343,33 +343,36 @@ System::partitionFirstFit()
 #endif
 
 
-	for (int i = 0; i < CORE_NUM; i++)
-		cpuSet[i].emptyCPU(); // Reset the CPU set
+    for (int i = 0; i < CORE_NUM; i++)
+        cpuSet[i].emptyCPU(); // Reset the CPU set
 
-	/*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
+    /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
     // Implement parititon first-fit and print result.
     setStartTime();
     System::printCPUInformation_self(1);//顯示CPU分配狀態
 //#if (PART == 3)
 //    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
 //#endif
-    int aaa = 0, acount = 0, aTID[10] = {0,0,0,0,0,0,0,0,0,0};
+    int aaa = 0, acount = 0, aTID[10] = { 0,0,0,0,0,0,0,0,0,0 };
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); aTID[acount] = i; acount++; }
-        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
-        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
-        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
+        else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]); }
+        else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]); }
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
-    }
 
+    }
+    #if (PART == 3)
+        std::cout << "Core0 start PID - " << threadSet[aTID[0]].PID_self() << std::endl; aaa = threadSet[aTID[0]].PID_self();
+        for (int i = 0; i < numThread; i++) {
+            if (aTID[i] != 0) {
+                std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[aTID[i]].PID_self() << std::endl; aaa = threadSet[aTID[i]].PID_self();
+            }
+        }
+    #endif
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
-#if (PART == 3)
-    std::cout << "Core0 start PID - " << threadSet[aTID[0]].PID_self() << std::endl; aaa = threadSet[aTID[0]].PID_self();
-    for (int i = 0; i < numThread; i++) {
-        if (aTID[i] != 0) {
-            std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[aTID[i]].PID_self() << std::endl; aaa = threadSet[aTID[i]].PID_self();
-#endif
-    } }
+
+
 
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     setEndTime();
