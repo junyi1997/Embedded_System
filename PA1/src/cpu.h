@@ -15,7 +15,7 @@ class CPU
 	void pushThreadToCPU (Thread*); // Push thread id to thread list
     void emptyCPU (); // Clear the thread list
 	void printCPUInformation (); // Print the partition result
-    
+	void printCPU0Information(); // Print the partition result
     float utilization () {return _utilization;};
     int cpuId () {return _cpuId;};
 	
