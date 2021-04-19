@@ -18,12 +18,14 @@ class CPU
 	void printCPU0Information(Thread*); // Print the partition result
     float utilization () {return _utilization;};
     int cpuId () {return _cpuId;};
+	int printCPU0Information123() { return cpu0aaa; };
 	
   private:
 	int *threadList ;      // List of thread in this cpu
 	int threadCount;       // Number of theread in this cpu
 	int _cpuId;            // CPU id whic used assign
 	float _utilization;    // Utilization of this cpu
+	int cpu0aaa
 
 };
 #endif
