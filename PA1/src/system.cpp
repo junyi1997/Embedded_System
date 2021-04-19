@@ -350,9 +350,7 @@ System::partitionFirstFit()
     // Implement parititon first-fit and print result.
     setStartTime();
     System::printCPUInformation_self(1);//顯示CPU分配狀態
-//#if (PART == 3)
-//    std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl;
-//#endif
+
     int aaa = 0, acount = 0, aTID[10] = { 0,0,0,0,0,0,0,0,0,0 };
     for (int i = 0; i < numThread; i++) {
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); aTID[acount] = i; acount++; }
@@ -363,11 +361,12 @@ System::partitionFirstFit()
 
     }
     #if (PART == 3)
-        std::cout << "Core0 start PID - " << threadSet[aTID[0]].PID_self() << std::endl; aaa = threadSet[aTID[0]].PID_self();
+        
         for (int i = 0; i < numThread; i++) {
             if (aTID[i] != 0) {
                 std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[aTID[i]].PID_self() << std::endl; aaa = threadSet[aTID[i]].PID_self();
             }
+            else if (i == 0) { std::cout << "Core0 start PID - " << threadSet[aTID[i]].PID_self() << std::endl; aaa = threadSet[aTID[0]].PID_self(); }
         }
     #endif
     for (int i = 0; i < numThread; i++) { pthread_join(threadSet[i].pthreadThread, NULL); }
