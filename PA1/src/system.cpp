@@ -287,7 +287,7 @@ System::printCPUInformation_self(int nomber)
     if (nomber == 1) 
     {
         for (int i = 0; i < numThread; i++) {
-            if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); cpuSet[0].printCPU0Information(&threadSet[i]);}
+            if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); }
             else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
             else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
             else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
@@ -355,7 +355,7 @@ System::partitionFirstFit()
 //#endif
     int aaa = 0, acount = 0, aTID[10] = {0,0,0,0,0,0,0,0,0,0};
     for (int i = 0; i < numThread; i++) {
-        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); aTID[acount] = i; acount++; }
+        if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); cpuSet[0].printCPU0Information(&threadSet[i]); aTID[acount] = i; acount++; }
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[3].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(3);  cpuSet[3].pushThreadToCPU(&threadSet[i]);}
