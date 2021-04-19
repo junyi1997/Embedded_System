@@ -66,6 +66,7 @@ CPU::printCPUInformation()
 void
 CPU::printCPU0Information(Thread* thread)
 {
+	numThread = atoi(line.c_str());
 	threadSet = new Thread[numThread];
 	threadList[threadCount] = thread->ID();
 	//std::cout << "threadList[threadCount] = " << threadList[threadCount] << std::endl;
