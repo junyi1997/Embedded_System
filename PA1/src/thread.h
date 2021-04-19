@@ -16,6 +16,7 @@
 #include "config.h"
 #include "../libs/check.h"
 
+#include "cpu.h"
 
 static pthread_mutex_t count_Mutex;	// pthread lock variable
 static int current_PID = -1;
