@@ -362,7 +362,7 @@ System::partitionFirstFit()
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         if (aaaa == 1) {
             #if (PART == 3)
-                if (aaa == 0) { std::cout << "Core0 start PID - " << i << std::endl; }
+                if (i == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
                 else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
                 aaa = threadSet[i].PID_self();
 
