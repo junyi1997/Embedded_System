@@ -358,7 +358,7 @@ System::partitionFirstFit()
         if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); 
         
         cpuSet[0].printCPU0Information(&threadSet[i]); 
-        std::cout << "printCPU0Information : " << cpuSet[0].printCPU0Information123() << std::endl;
+        std::cout << "printCPU0Information : " << threadSet[cpuSet[0].printCPU0Information123()]..PID_self() << std::endl;
         aTID[acount] = i; acount++; }
         else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
         else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
