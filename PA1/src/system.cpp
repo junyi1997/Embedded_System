@@ -363,7 +363,7 @@ System::partitionFirstFit()
         if (aaaa == 1) {
             #if (PART == 3)
                 if (aaa == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
-                else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[i].PID_self() << std::endl; }
+                else { std::cout << "Core0 context switch from PID - " << i << " to PID - " << threadSet[i].PID_self() << std::endl; }
                 aaa = threadSet[i].PID_self();
 
 
