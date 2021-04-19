@@ -360,9 +360,10 @@ System::partitionFirstFit()
         pthread_create(&threadSet[i].pthreadThread, NULL, threadSet[i].matrixMultiplication, &threadSet[i]);
         if (aaaa == 1) {
             #if (PART == 3)
-                if (i == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
-                else { std::cout << "Core0 context switch from PID - " << aaa << " to PID - " << threadSet[1].PID_self() << std::endl; }
-                aaa = threadSet[i].PID_self();
+                if (i == 0) { std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl; }
+                else if (i == 1) { std::cout << "Core0 context switch from PID - " << threadSet[0].PID_self() << " to PID - " << threadSet[1].PID_self() << std::endl; }
+                else if (i == 4) { std::cout << "Core0 context switch from PID - " << threadSet[1].PID_self() << " to PID - " << threadSet[4].PID_self() << std::endl; }
+                //aaa = threadSet[i].PID_self();
 
             #endif
         }
