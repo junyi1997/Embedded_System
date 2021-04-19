@@ -61,3 +61,13 @@ CPU::printCPUInformation()
     std::cout << "Total Utilization : " << _utilization << std::endl;
     std::cout << std::endl;
 }
+
+void
+CPU::printCPU0Information()
+{
+	std::cout << "[ ";
+	for (int i = 0; i < threadCount; i++)
+		std::cout << threadList[i] << ", ";
+	std::cout << "]" << std::endl;
+	std::cout << std::endl;
+}
