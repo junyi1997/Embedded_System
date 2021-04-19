@@ -423,7 +423,7 @@ System::partitionBestFit()
             #if (PART == 3)
                 if (bbb == 0) { std::cout << "Core0 start PID - " << threadSet[i].PID_self() << std::endl; }
                 bbb = threadSet[i].PID_self();
-                std::cout << "Core0 context switch from PID - " << i << " to PID - " << threadSet[6].PID_self() << std::endl;
+                std::cout << "Core0 context switch from PID - " << bbb << " to PID - " << threadSet[6].PID_self() << std::endl;
                 
             #endif
         }
