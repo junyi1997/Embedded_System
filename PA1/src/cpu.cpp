@@ -50,7 +50,6 @@ CPU::emptyCPU(void)
 	_utilization = 0;
 }
 
-
 void
 CPU::printCPUInformation()
 {
@@ -63,13 +62,3 @@ CPU::printCPUInformation()
     std::cout << std::endl;
 }
 
-void
-CPU::printCPU0Information(Thread* thread)
-{
-
-	threadList[threadCount] = thread->ID();
-	//std::cout << "threadList[threadCount] = " << threadList[threadCount] << std::endl;
-	cpu0aaa = threadList[threadCount];
-	//if (threadCount == 0) { std::cout << "Core0 start PID - " << threadSet[0].PID_self() << std::endl; aaa = threadSet[0].PID_self(); }
-	//threadCount++;
-}
