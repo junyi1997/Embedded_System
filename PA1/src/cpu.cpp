@@ -31,7 +31,6 @@ void
 CPU::pushThreadToCPU(Thread* thread)
 {
 	threadList[threadCount] = thread->ID();
-	std::cout << "threadList[threadCount] = " << threadList[threadCount] << std::endl;
 	_utilization += thread->utilization();
 	threadCount++;
 	
@@ -65,13 +64,10 @@ CPU::printCPUInformation()
 }
 
 void
-CPU::printCPU0Information()
+CPU::printCPU0Information(Thread* thread)
 {
-	std::cout << "[ ";
-	for (int i = 0; i < threadCount; i++)
-		std::cout << threadList[i] << ", ";
-	std::cout << "]" << std::endl;
-	std::cout << std::endl;
-
-	//threadList[threadCount] = thread->ID();
+	threadList[threadCount] = thread->ID();
+	std::cout << "threadList[threadCount] = " << threadList[threadCount] << std::endl;
+	_utilization += thread->utilization();
+	threadCount++;
 }
