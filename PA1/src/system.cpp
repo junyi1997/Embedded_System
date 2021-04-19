@@ -287,7 +287,6 @@ System::printCPUInformation_self(int nomber)
     if (nomber == 1) 
     {
         for (int i = 0; i < numThread; i++) {
-            std::cout << "First-Fit "  << std::endl;
             if (cpuSet[0].utilization() + threadSet[i].utilization() < 1) {threadSet[i].setUpCPUAffinityMask(0); cpuSet[0].pushThreadToCPU(&threadSet[i]); cpuSet[0].printCPU0Information(&threadSet[i]);}
             else if (cpuSet[1].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(1); cpuSet[1].pushThreadToCPU(&threadSet[i]);}
             else if (cpuSet[2].utilization() + threadSet[i].utilization() < 1) { threadSet[i].setUpCPUAffinityMask(2); cpuSet[2].pushThreadToCPU(&threadSet[i]);}
