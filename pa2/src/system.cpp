@@ -112,6 +112,7 @@ System::init ()
     sharedSum = new int [PROGRAM_NUM];
 
 	/*~~~~~~~~~Your code(PART1&PART3)~~~~~~~~*/
+    pthread_mutex_t count_mutex;
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
 
