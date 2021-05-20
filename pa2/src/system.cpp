@@ -117,6 +117,7 @@ System::init ()
     std::cout << "This is part 1" << std::endl;
 #elif (PART == 3) //part3 code
     std::cout << "This is part 3" << std::endl;
+    pthread_spinlock_t lock;
     pthread_spin_init(&lock, PTHREAD_PROCESS_PRIVATE);
 #endif
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
