@@ -117,6 +117,9 @@ System::init ()
 
     pthread_barrier_t barr;
     pthread_barrier_init(&barr, NULL, 4);
+    std::cout << "main() is ready.\n" << std::endl;
+    pthread_barrier_wait(&barr);
+    std::cout << "main() is going!\n" << std::endl;
     std::cout << "This is part 1" << std::endl;
 #elif (PART == 3) //part3 code
     std::cout << "This is part 3" << std::endl;
