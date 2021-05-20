@@ -170,7 +170,7 @@ Thread::matrixMultiplication(void* args)
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     Thread *obj = (Thread*)args;
 	pthread_mutex_t count_mutex;
-	pthread_barrier_t barr;
+	//pthread_barrier_t barr;
 	//pthread_barrier_init(&barr, NULL, 4);
 	
 	obj->setUpCPUAffinityMask ();
