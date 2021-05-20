@@ -99,8 +99,7 @@ Thread::synchronize ()
 {
 #if SYNCHRONIZE == BARRIER
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-	std::cout << "\t2123123131"  << std::endl;
-	pthread_mutex_t count_mutex;
+	
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 	pthread_mutex_lock (ioMutex);
@@ -171,6 +170,7 @@ Thread::matrixMultiplication(void* args)
 {
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     Thread *obj = (Thread*)args;
+	pthread_mutex_t count_mutex;
 
 	obj->setUpCPUAffinityMask ();
 	obj->printInformation ();
