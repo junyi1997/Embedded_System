@@ -169,7 +169,7 @@ Thread::matrixMultiplication(void* args)
 {
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     Thread *obj = (Thread*)args;
-	pthread_mutex_t count_mutex;
+	//pthread_mutex_t count_mutex;
 	//pthread_barrier_t barr;
 	//pthread_barrier_init(&barr, NULL, 4);
 	
@@ -185,10 +185,10 @@ Thread::matrixMultiplication(void* args)
 
 #if (PART != 2)
 				std::cout << "main() is ready.\n" << std::endl;
-				pthread_barrier_wait(&barr);
+				pthread_barrier_wait(barr);
 				std::cout << "main() is going!\n" << std::endl;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_lock(&count_mutex);
+				pthread_mutex_lock(ioMutex);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
 	    		for (int k = 0 ; k < obj->matrixSize; k++)
@@ -196,7 +196,7 @@ Thread::matrixMultiplication(void* args)
 
                 obj->multiResult [i][j] = *obj->sharedSum;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_unlock(&count_mutex);
+				pthread_mutex_unlock(ioMutex);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 
