@@ -114,6 +114,9 @@ System::init ()
 	/*~~~~~~~~~Your code(PART1&PART3)~~~~~~~~*/
     //pthread_mutex_t count_mutex;
 #if (PART == 1)//part1 code
+
+    pthread_barrier_t barr;
+    pthread_barrier_init(&barr, NULL, 4);
     std::cout << "This is part 1" << std::endl;
 #elif (PART == 3) //part3 code
     std::cout << "This is part 3" << std::endl;
