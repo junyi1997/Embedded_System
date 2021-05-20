@@ -47,5 +47,6 @@ class System
     int* sharedSum;                // Shared resource
 
     static pthread_mutex_t ioMutex; // IO mutex
+    static pthread_barrier_t barr; // IO mutex
 };
 #endif
