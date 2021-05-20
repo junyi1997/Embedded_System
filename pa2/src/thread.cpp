@@ -188,7 +188,7 @@ Thread::matrixMultiplication(void* args)
 				pthread_barrier_wait(&barr);
 				std::cout << "main() is going!\n" << std::endl;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_lock(&count_mutex);
+				//pthread_mutex_lock(&count_mutex);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
 	    		for (int k = 0 ; k < obj->matrixSize; k++)
@@ -196,7 +196,7 @@ Thread::matrixMultiplication(void* args)
 
                 obj->multiResult [i][j] = *obj->sharedSum;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_unlock(&count_mutex);
+				//pthread_mutex_unlock(&count_mutex);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 
