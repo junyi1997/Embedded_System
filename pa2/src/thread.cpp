@@ -173,7 +173,7 @@ Thread::matrixMultiplication(void* args)
 	//pthread_mutex_t count_mutex;
 	//pthread_barrier_t barr;
 	pthread_spinlock_t lock;
-	pthread_spin_init(&lock, PTHREAD_PROCESS_PRIVATE);
+	
 	obj->setUpCPUAffinityMask ();
 	obj->printInformation ();
 
