@@ -99,6 +99,8 @@ Thread::synchronize ()
 {
 #if SYNCHRONIZE == BARRIER
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
+	pthread_mutex_t count_mutex;
+
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 	pthread_mutex_lock (ioMutex);
@@ -113,6 +115,8 @@ Thread::enterCriticalSection ()
 {
 #if PROTECT_SHARED_RESOURCE == MUTEX
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
+
+
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 	pthread_mutex_lock (ioMutex);
@@ -179,13 +183,17 @@ Thread::matrixMultiplication(void* args)
 	    	for (int j = 0 ; j < obj->matrixSize; j++) {
 
 #if (PART != 2)
-
+				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
+				pthread_mutex_lock(&count_mutex);
+				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
 	    		for (int k = 0 ; k < obj->matrixSize; k++)
 	    			*obj->sharedSum += obj->matrix [i][k] * obj->matrix [k][j];
 
                 obj->multiResult [i][j] = *obj->sharedSum;
-
+				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
+				pthread_mutex_unlock(&count_mutex);
+				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 
 	        /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
