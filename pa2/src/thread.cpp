@@ -169,7 +169,7 @@ Thread::matrixMultiplication(void* args)
 {
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     Thread *obj = (Thread*)args;
-	pthread_mutex_t* ioMutex;
+	pthread_mutex_t* __ioMutex;
 	//pthread_barrier_t barr;
 	//pthread_barrier_init(&barr, NULL, 4);
 	
