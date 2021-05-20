@@ -170,8 +170,10 @@ Thread::matrixMultiplication(void* args)
 {
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     Thread *obj = (Thread*)args;
-	pthread_mutex_t count_mutex;
-
+	//pthread_mutex_t count_mutex;
+	//pthread_barrier_t barr;
+	pthread_spinlock_t lock;
+	pthread_spin_init(&lock, PTHREAD_PROCESS_PRIVATE);
 	obj->setUpCPUAffinityMask ();
 	obj->printInformation ();
 
@@ -184,7 +186,8 @@ Thread::matrixMultiplication(void* args)
 
 #if (PART != 2)
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_lock(&count_mutex);
+				//pthread_mutex_lock(&count_mutex);
+				pthread_spin_lock(&lock);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
 	    		for (int k = 0 ; k < obj->matrixSize; k++)
@@ -192,7 +195,8 @@ Thread::matrixMultiplication(void* args)
 
                 obj->multiResult [i][j] = *obj->sharedSum;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_unlock(&count_mutex);
+				//pthread_mutex_unlock(&count_mutex);
+				pthread_spin_unlock(&lock);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 
