@@ -112,7 +112,12 @@ System::init ()
     sharedSum = new int [PROGRAM_NUM];
 
 	/*~~~~~~~~~Your code(PART1&PART3)~~~~~~~~*/
-    pthread_mutex_t count_mutex;
+    //pthread_mutex_t count_mutex;
+#if (PART == 1)//part1 code
+    std::cout << "This is part 1" << std::endl;
+#else//part3 code
+    std::cout << "This is part 3" << std::endl;
+#endif
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
 
