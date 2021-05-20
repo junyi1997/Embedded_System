@@ -115,7 +115,6 @@ Thread::enterCriticalSection ()
 #if PROTECT_SHARED_RESOURCE == MUTEX
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 
-
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 	pthread_mutex_lock (ioMutex);
@@ -170,9 +169,9 @@ Thread::matrixMultiplication(void* args)
 {
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     Thread *obj = (Thread*)args;
-	//pthread_mutex_t count_mutex;
-	//pthread_barrier_t barr;
-	pthread_spinlock_t lock;
+	pthread_mutex_t count_mutex;
+	pthread_barrier_t barr;
+	pthread_barrier_init(&barr, NULL, 5);
 	
 	obj->setUpCPUAffinityMask ();
 	obj->printInformation ();
@@ -185,9 +184,11 @@ Thread::matrixMultiplication(void* args)
 	    	for (int j = 0 ; j < obj->matrixSize; j++) {
 
 #if (PART != 2)
+				std::cout << "main() is ready.\n" << std::endl;
+				pthread_barrier_wait(&barr);
+				std::cout << "main() is going!\n" << std::endl;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				//pthread_mutex_lock(&count_mutex);
-				pthread_spin_lock(&lock);
+				pthread_mutex_lock(&count_mutex);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
 	    		for (int k = 0 ; k < obj->matrixSize; k++)
@@ -195,8 +196,7 @@ Thread::matrixMultiplication(void* args)
 
                 obj->multiResult [i][j] = *obj->sharedSum;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				//pthread_mutex_unlock(&count_mutex);
-				pthread_spin_unlock(&lock);
+				pthread_mutex_unlock(&count_mutex);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 
