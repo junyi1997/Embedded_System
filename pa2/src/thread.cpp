@@ -171,7 +171,7 @@ Thread::matrixMultiplication(void* args)
     Thread *obj = (Thread*)args;
 	pthread_mutex_t count_mutex;
 	pthread_barrier_t barr;
-	pthread_barrier_init(&barr, NULL, 4);
+	pthread_barrier_init(&barr, NULL, 5);
 	
 	obj->setUpCPUAffinityMask ();
 	obj->printInformation ();
@@ -185,7 +185,7 @@ Thread::matrixMultiplication(void* args)
 
 #if (PART != 2)
 				std::cout << "main() is ready.\n" << std::endl;
-				//pthread_barrier_wait(&barr);
+				pthread_barrier_wait(&barr);
 				std::cout << "main() is going!\n" << std::endl;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				pthread_mutex_lock(&count_mutex);
