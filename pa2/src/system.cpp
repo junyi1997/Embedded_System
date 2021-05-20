@@ -115,12 +115,9 @@ System::init ()
     //pthread_mutex_t count_mutex;
 #if (PART == 1)//part1 code
     std::cout << "This is part 1" << std::endl;
-#else if (PART == 3) //part3 code
+#elif (PART == 3) //part3 code
     std::cout << "This is part 3" << std::endl;
-    pthread_spinlock_t lock;
-    pthread_spin_init(&lock, pshared);
-    pthread_spin_lock(&lock);
-    pthread_spin_unlock(&lock);
+
 #endif
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
