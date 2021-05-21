@@ -184,7 +184,7 @@ Thread::matrixMultiplication(void* args)
 
 #if (PART != 2)
 				std::cout << "main() is ready.\n" << std::endl;
-				//pthread_barrier_wait(obj->barr);
+				pthread_barrier_wait(obj->barr);
 				std::cout << "main() is going!\n" << std::endl;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				pthread_mutex_lock(obj->ioMutex);
