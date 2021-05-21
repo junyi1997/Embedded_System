@@ -44,7 +44,7 @@ System::System ()
             threadSet [prog_index][thread_index].setEndCalculatePoint ((thread_index + 1) * MATRIX_SIZE / THREAD_NUM);
 
             threadSet [prog_index][thread_index].setUpIOMutex (&System::ioMutex);
-
+            threadSet[prog_index][thread_index].setUpBarr(&System::barr);
         }
 
     }
