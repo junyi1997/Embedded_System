@@ -114,9 +114,7 @@ Thread::enterCriticalSection ()
 {
 #if PROTECT_SHARED_RESOURCE == MUTEX
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-	std::cout << "main() is ready.\n" << std::endl;
-	pthread_barrier_wait(obj->barr);
-	std::cout << "main() is going!\n" << std::endl;
+	
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 	pthread_mutex_lock (ioMutex);
@@ -182,7 +180,12 @@ Thread::matrixMultiplication(void* args)
 
 	    for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 #if (PART != 1)
+			synchronize();
 			enterCriticalSection();
+			std::cout << "main() is ready.\n" << std::endl;
+			pthread_barrier_wait(obj->barr);
+			std::cout << "main() is going!\n" << std::endl;
+
 #endif
 	    	for (int j = 0 ; j < obj->matrixSize; j++) {
 
