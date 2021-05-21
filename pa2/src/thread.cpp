@@ -99,7 +99,7 @@ Thread::synchronize ()
 {
 #if SYNCHRONIZE == BARRIER
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-	
+	std::cout << "This is BARRIER inside" << std::endl;
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 	pthread_mutex_lock (ioMutex);
@@ -114,7 +114,7 @@ Thread::enterCriticalSection ()
 {
 #if PROTECT_SHARED_RESOURCE == MUTEX
 	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-	
+	std::cout << "This is MUTEX inside" << std::endl;
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 	pthread_mutex_lock (ioMutex);
