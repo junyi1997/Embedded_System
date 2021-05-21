@@ -20,6 +20,7 @@ class System
   public:
     System (); 
     void setUpMatrix ();           // Initialize the all matrix
+    void setUpBarr();           // Initialize the all matrix
     void init (); 
     
     void singleCoreMatrixMulti (); // Single thread matrix multiplicaiton
