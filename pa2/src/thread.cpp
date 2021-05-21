@@ -177,14 +177,18 @@ Thread::matrixMultiplication(void* args)
 
 	// Multiplication for MULTI_TIME times
     for (int num_multi = 0; num_multi < MULTI_TIME; num_multi++) {
-
+#if (PART != 1)
+		std::cout << "main() is ready.\n" << std::endl;
+		pthread_barrier_wait(obj->barr);
+		std::cout << "main() is going!\n" << std::endl;
+#endif
 	    for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 
 	    	for (int j = 0 ; j < obj->matrixSize; j++) {
 
 #if (PART != 2)
 				//std::cout << "main() is ready.\n" << std::endl;
-				pthread_barrier_wait(obj->barr);
+				//pthread_barrier_wait(obj->barr);
 				//std::cout << "main() is going!\n" << std::endl;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				pthread_mutex_lock(obj->ioMutex);
