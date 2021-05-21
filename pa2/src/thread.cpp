@@ -188,9 +188,9 @@ Thread::matrixMultiplication(void* args)
 				//pthread_barrier_wait(&barr);
 				//std::cout << "main() is going!\n" << std::endl;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_lock(ioMutex);
+				pthread_mutex_lock(obj->ioMutex);
 				std::cout << "Synchronize method not supported." << std::endl;
-				pthread_mutex_unlock(ioMutex);
+				pthread_mutex_unlock(obj->ioMutex);
 				//pthread_mutex_lock(&count_mutex);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
