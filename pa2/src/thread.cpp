@@ -189,6 +189,7 @@ Thread::matrixMultiplication(void* args)
 #if (PART != 2)
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				//pthread_mutex_lock(obj->ioMutex);
+				std::cout << "num_multi is lock."<< num_multi << std::endl;
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
 	    		for (int k = 0 ; k < obj->matrixSize; k++)
@@ -197,6 +198,7 @@ Thread::matrixMultiplication(void* args)
                 obj->multiResult [i][j] = *obj->sharedSum;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				//pthread_mutex_unlock(obj->ioMutex);
+				std::cout << "num_multi is unlock." << num_multi << std::endl;
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #else
 
