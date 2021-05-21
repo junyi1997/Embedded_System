@@ -177,7 +177,7 @@ Thread::matrixMultiplication(void* args)
 
 	// Multiplication for MULTI_TIME times
     for (int num_multi = 0; num_multi < MULTI_TIME; num_multi++) {
-#if (PART != 1)
+#if (PART == 1)
 		std::cout << "main( " << num_multi<<" ) is ready.\n"<< std::endl;
 		synchronize();
 		enterCriticalSection();
