@@ -55,6 +55,7 @@ class Thread
 	int **multiResult;		             // Multi-core matrix multiplication result
 
     pthread_mutex_t* ioMutex;            // IO mutex
+	pthread_barrier_t* barr;             // IO mutex
     int* sharedSum;                      // Shared resource
 
 };
