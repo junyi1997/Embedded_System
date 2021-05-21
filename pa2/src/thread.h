@@ -17,6 +17,8 @@ class Thread
   public:
 	void initialThread (int, int, int, int**, int**, int**, int**, int*);
     void setUpIOMutex (pthread_mutex_t* tmp_mutex) {ioMutex = tmp_mutex;};
+	void setUpBarr(pthread_barrier_t* tmp_barr) { ioMutex = tmp_barr; };
+
 
 	void setThreadCore (int);            // Set core thread pinned on
     void setStartCalculatePoint (int);   // Set start calculate point for mul
