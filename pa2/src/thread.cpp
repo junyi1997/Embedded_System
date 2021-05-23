@@ -206,7 +206,7 @@ Thread::matrixMultiplication(void* args)
 				pthread_spin_unlock(obj->lock);
 				//std::cout << "num_multi is unlock." << num_multi << std::endl;
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-#else
+#elif (PART == 2)
 
 	        /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
 			obj->multiResult[i][j] = 0;
