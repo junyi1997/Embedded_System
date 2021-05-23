@@ -212,7 +212,7 @@ Thread::matrixMultiplication(void* args)
 			*obj->multiResult = 0;
 			for (int k = 0; k < obj->matrixSize; k++)
 				**obj->multiResult[i][j] += obj->matrix[i][k] * obj->matrix[k][j];
-			**obj->multiResult[i][j] = **obj->multiResult[i][j];
+			//**obj->multiResult[i][j] = **obj->multiResult[i][j];
 	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 #endif
@@ -220,11 +220,20 @@ Thread::matrixMultiplication(void* args)
 
 	    } // for (int i...
 
-
+#if (PART != 2)
+		/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 		pthread_barrier_wait(obj->barr);
+		/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 		// Copy the multiResult back to matrix
 		for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
 			memcpy(obj->matrix[i], obj->multiResult[i], obj->matrixSize * sizeof(int));
+		
+#else
+		// Copy the multiResult back to matrix
+		for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
+			memcpy(obj->matrix[i], obj->multiResult[i], obj->matrixSize * sizeof(int));
+#endif
+
 
     } // for (int num_multi...
 
