@@ -220,15 +220,13 @@ Thread::matrixMultiplication(void* args)
 
 	    } // for (int i...
 
-#if (PART == 1)
+#if (PART != 2)
 		pthread_barrier_wait(obj->barr);
 
-#elif (PART == 3)
-		pthread_spin_lock(obj->lock);
 		// Copy the multiResult back to matrix
 		for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
 			memcpy(obj->matrix[i], obj->multiResult[i], obj->matrixSize * sizeof(int));
-		pthread_spin_unlock(obj->lock);
+		
 #else
 		// Copy the multiResult back to matrix
 		for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
