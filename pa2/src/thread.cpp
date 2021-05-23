@@ -219,17 +219,21 @@ Thread::matrixMultiplication(void* args)
 
 #if (PART == 1)
 		pthread_barrier_wait(obj->barr);
+#endif
 
-#endif
 #if (PART == 3)
+		pthread_barrier_wait(obj->barr);
 		pthread_spin_lock(obj->lock);
-#endif
-        // Copy the multiResult back to matrix
-        for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
-            memcpy (obj->matrix [i], obj->multiResult [i], obj->matrixSize * sizeof (int));
-#if (PART == 3)
+		// Copy the multiResult back to matrix
+		for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
+			memcpy(obj->matrix[i], obj->multiResult[i], obj->matrixSize * sizeof(int));
 		pthread_spin_unlock(obj->lock);
+#else
+		// Copy the multiResult back to matrix
+		for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
+			memcpy(obj->matrix[i], obj->multiResult[i], obj->matrixSize * sizeof(int));
 #endif
+
 
     } // for (int num_multi...
 
