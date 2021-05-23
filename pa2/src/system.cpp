@@ -123,7 +123,7 @@ System::init ()
     sharedSum = new int [PROGRAM_NUM];
 
 	/*~~~~~~~~~Your code(PART1&PART3)~~~~~~~~*/
-    pthread_barrier_init(&System::barr, NULL, 4);
+    pthread_barrier_init(&System::barr, NULL, PROGRAM_NUM * 4);
 #if (PART == 3) //part3 code
     pthread_spin_init(&System::lock, PTHREAD_PROCESS_PRIVATE);
 #endif
