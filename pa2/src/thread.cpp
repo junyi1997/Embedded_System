@@ -174,8 +174,9 @@ Thread::matrixMultiplication(void* args)
 
 	// Multiplication for MULTI_TIME times
     for (int num_multi = 0; num_multi < MULTI_TIME; num_multi++) {
-
+		/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 	    pthread_barrier_wait(obj->barr);
+		/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 	    for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 
 	    	for (int j = 0 ; j < obj->matrixSize; j++) {
