@@ -175,9 +175,7 @@ Thread::matrixMultiplication(void* args)
 	// Multiplication for MULTI_TIME times
     for (int num_multi = 0; num_multi < MULTI_TIME; num_multi++) {
 #if (PART == 1)
-				std::cout << "main() is ready.\n" << std::endl;
 				pthread_barrier_wait(obj->barr);
-				std::cout << "main() is going!\n" << std::endl;
 #endif
 	    for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 
@@ -186,7 +184,6 @@ Thread::matrixMultiplication(void* args)
 #if (PART == 1)
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				pthread_mutex_lock(obj->ioMutex);
-				//std::cout << "num_multi is lock."<< num_multi << std::endl;
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
 	    		for (int k = 0 ; k < obj->matrixSize; k++)
@@ -195,7 +192,6 @@ Thread::matrixMultiplication(void* args)
                 obj->multiResult [i][j] = *obj->sharedSum;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 				pthread_mutex_unlock(obj->ioMutex);
-				//std::cout << "num_multi is unlock." << num_multi << std::endl;
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #elif (PART == 3)
 				/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
@@ -224,9 +220,7 @@ Thread::matrixMultiplication(void* args)
 	    } // for (int i...
 
 #if (PART == 1)
-		std::cout << "main() is ready.\n" << std::endl;
 		pthread_barrier_wait(obj->barr);
-		std::cout << "main() is going!\n" << std::endl;
 #endif
         // Copy the multiResult back to matrix
         for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
