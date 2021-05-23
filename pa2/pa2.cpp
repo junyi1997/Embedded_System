@@ -17,7 +17,7 @@ e.g.      ./part1.out
 int main ()
 {
     System sys;
-    //sys.singleCoreMatrixMulti (); // Single thread matrix multiplication
+    sys.singleCoreMatrixMulti (); // Single thread matrix multiplication
     sys.multiCoreMatrixMulti (); // Multi-thread matrix multiplicaiton
 
     return 0;
