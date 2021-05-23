@@ -211,7 +211,7 @@ Thread::matrixMultiplication(void* args)
 	        /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
 			*obj->sharedSum = 0;
 			for (int k = 0; k < obj->matrixSize; k++)
-				*obj->sharedSum += obj->matrix[i][k] * obj->matrix[k][j];
+				*obj->multiresult += obj->matrix[i][k] * obj->matrix[k][j];
 			obj->multiResult[i][j] = *obj->sharedSum;
 	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
