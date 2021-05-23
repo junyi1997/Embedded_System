@@ -17,7 +17,12 @@ class Thread
   public:
 	void initialThread (int, int, int, int**, int**, int**, int**, int*);
     void setUpIOMutex (pthread_mutex_t* tmp_mutex) {ioMutex = tmp_mutex;};
+	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 	void setUpBarr(pthread_barrier_t* tmp_barr) { barr = tmp_barr; };
+    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+	/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
+	void setUpSpinlock(pthread_spinlock_t* tmp_lock) { barr = tmp_lock; };
+	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 
 	void setThreadCore (int);            // Set core thread pinned on
@@ -57,7 +62,14 @@ class Thread
 	int **multiResult;		             // Multi-core matrix multiplication result
 
     pthread_mutex_t* ioMutex;            // IO mutex
+	/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 	pthread_barrier_t* barr;             // IO mutex
+	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+	/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
+	pthread_spinlock_t* lock;             // IO mutex
+	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+
+
     int* sharedSum;                      // Shared resource
 
 };

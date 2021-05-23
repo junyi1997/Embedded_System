@@ -1,7 +1,12 @@
 #include "system.h"
 
 pthread_mutex_t System::ioMutex;
+/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
 pthread_barrier_t System::barr;
+/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
+pthread_spinlock_t System::lock;
+/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 /**
  * Set up the threadSet dependent on the inputfile.
@@ -44,7 +49,13 @@ System::System ()
             threadSet [prog_index][thread_index].setEndCalculatePoint ((thread_index + 1) * MATRIX_SIZE / THREAD_NUM);
 
             threadSet [prog_index][thread_index].setUpIOMutex (&System::ioMutex);
+            /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
             threadSet[prog_index][thread_index].setUpBarr (&System::barr);
+            /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+            /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
+            threadSet[prog_index][thread_index].setUpSpinlock(&System::lock);
+            /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+            
         }
 
     }

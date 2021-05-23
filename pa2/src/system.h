@@ -20,7 +20,13 @@ class System
   public:
     System (); 
     void setUpMatrix ();           // Initialize the all matrix
+    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     void setUpBarr();           // Initialize the all matrix
+    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
+    void setUpSpinlock();           // Initialize the all matrix
+    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+
     void init (); 
     
     void singleCoreMatrixMulti (); // Single thread matrix multiplicaiton
@@ -48,6 +54,12 @@ class System
     int* sharedSum;                // Shared resource
 
     static pthread_mutex_t ioMutex; // IO mutex
+    /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
     static pthread_barrier_t barr; // IO mutex
+    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
+    static pthread_spinlock_t lock; // IO mutex
+    /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+
 };
 #endif
