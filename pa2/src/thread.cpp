@@ -213,8 +213,6 @@ Thread::matrixMultiplication(void* args)
 	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 #endif
-
-
 	    	} // for (int j...
 
 	    } // for (int i...
