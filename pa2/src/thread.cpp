@@ -223,7 +223,11 @@ Thread::matrixMultiplication(void* args)
 
 	    } // for (int i...
 
-
+#if (PART == 1)
+		std::cout << "main() is ready.\n" << std::endl;
+		pthread_barrier_wait(obj->barr);
+		std::cout << "main() is going!\n" << std::endl;
+#endif
         // Copy the multiResult back to matrix
         for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
             memcpy (obj->matrix [i], obj->multiResult [i], obj->matrixSize * sizeof (int));
