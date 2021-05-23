@@ -21,7 +21,7 @@ class Thread
 	void setUpBarr(pthread_barrier_t* tmp_barr) { barr = tmp_barr; };
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 	/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
-	void setUpSpinlock(pthread_spinlock_t* tmp_lock) { barr = tmp_lock; };
+	void setUpSpinlock(pthread_spinlock_t* tmp_lock) { lock = tmp_lock; };
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 
