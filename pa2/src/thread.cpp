@@ -201,7 +201,6 @@ Thread::matrixMultiplication(void* args)
 				*obj->sharedSum = 0;
 				for (int k = 0; k < obj->matrixSize; k++)
 					*obj->sharedSum += obj->matrix[i][k] * obj->matrix[k][j];
-
 				obj->multiResult[i][j] = *obj->sharedSum;
 				/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 				pthread_spin_unlock(obj->lock);
@@ -210,6 +209,10 @@ Thread::matrixMultiplication(void* args)
 #else
 
 	        /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
+			*obj->sharedSum = 0;
+			for (int k = 0; k < obj->matrixSize; k++)
+				*obj->sharedSum += obj->matrix[i][k] * obj->matrix[k][j];
+			obj->multiResult[i][j] = *obj->sharedSum;
 	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 #endif
@@ -219,10 +222,8 @@ Thread::matrixMultiplication(void* args)
 
 #if (PART == 1)
 		pthread_barrier_wait(obj->barr);
-#endif
 
-#if (PART == 3)
-		pthread_barrier_wait(obj->barr);
+#elif (PART == 3)
 		pthread_spin_lock(obj->lock);
 		// Copy the multiResult back to matrix
 		for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
