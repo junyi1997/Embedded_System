@@ -58,7 +58,7 @@ class System
     static pthread_barrier_t barr; // IO mutex
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
-    static pthread_spinlock_t barr; // IO mutex
+    static pthread_spinlock_t lock; // IO mutex
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 
 };

@@ -16,8 +16,10 @@ System::System ()
 {
     init ();
     setUpMatrix (); // Inital singleResult, multiResult, matrix, and inpoutMatrix
+
     threadSet = new Thread* [PROGRAM_NUM];
     check = new Check [PROGRAM_NUM];
+
     for (int prog_index = 0; prog_index < PROGRAM_NUM; prog_index++) {
 
 	    threadSet [prog_index] = new Thread [THREAD_NUM];
@@ -25,9 +27,13 @@ System::System ()
                                          singleResult [prog_index], 
                                          multiResult [prog_index],
                                          MATRIX_SIZE);
+
     }
+
     for (int prog_index = 0; prog_index < PROGRAM_NUM; prog_index++) {
+
         for (int thread_index = 0; thread_index < THREAD_NUM; thread_index++) {
+
 	    	threadSet [prog_index][thread_index].initialThread (prog_index,
                                                                 thread_index,
                                                                 MATRIX_SIZE,
@@ -38,8 +44,10 @@ System::System ()
                                                                 &sharedSum [prog_index]);
 
             threadSet [prog_index][thread_index].setThreadCore (thread_index);
+
             threadSet [prog_index][thread_index].setStartCalculatePoint (thread_index * MATRIX_SIZE / THREAD_NUM);
             threadSet [prog_index][thread_index].setEndCalculatePoint ((thread_index + 1) * MATRIX_SIZE / THREAD_NUM);
+
             threadSet [prog_index][thread_index].setUpIOMutex (&System::ioMutex);
             /*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
             threadSet[prog_index][thread_index].setUpBarr (&System::barr);
@@ -122,7 +130,7 @@ System::init ()
 #elif (PART == 3) //part3 code
     std::cout << "This is part 3" << std::endl;
     //pthread_spinlock_t lock;
-    pthread_spin_init(&System::lock, PTHREAD_PROCESS_PRIVATE);
+    //pthread_spin_init(&lock, PTHREAD_PROCESS_PRIVATE);
 #endif
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 }
