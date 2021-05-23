@@ -174,9 +174,8 @@ Thread::matrixMultiplication(void* args)
 
 	// Multiplication for MULTI_TIME times
     for (int num_multi = 0; num_multi < MULTI_TIME; num_multi++) {
-#if (PART == 1)
-				pthread_barrier_wait(obj->barr);
-#endif
+
+	    pthread_barrier_wait(obj->barr);
 	    for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++) {
 
 	    	for (int j = 0 ; j < obj->matrixSize; j++) {
@@ -207,7 +206,6 @@ Thread::matrixMultiplication(void* args)
 				//std::cout << "num_multi is unlock." << num_multi << std::endl;
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #elif (PART == 2)
-
 	        /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
 			obj->multiResult[i][j] = 0;
 			for (int k = 0; k < obj->matrixSize; k++)
@@ -225,9 +223,6 @@ Thread::matrixMultiplication(void* args)
 		// Copy the multiResult back to matrix
 		for (int i = obj->startCalculatePoint; i < obj->endCalculatePoint; i++)
 			memcpy(obj->matrix[i], obj->multiResult[i], obj->matrixSize * sizeof(int));
-		
-
-
 
     } // for (int num_multi...
 
