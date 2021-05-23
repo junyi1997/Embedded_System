@@ -209,7 +209,7 @@ Thread::matrixMultiplication(void* args)
 #else
 
 	        /*~~~~~~~~~~~~Your code(PART2)~~~~~~~~~~~*/
-			*obj->multiResult[i][j] = 0;
+			obj->multiResult[i][j] = 0;
 			for (int k = 0; k < obj->matrixSize; k++)
 				obj->multiResult[i][j] += obj->matrix[i][k] * obj->matrix[k][j];
 	        /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
