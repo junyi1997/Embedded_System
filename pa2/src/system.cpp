@@ -56,7 +56,6 @@ System::System ()
             /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
             threadSet[prog_index][thread_index].setUpSpinlock(&System::lock);
             /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-            threadSet[prog_index][thread_index].setUpSem(&System::sem);
             
         }
 
