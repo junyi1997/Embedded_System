@@ -23,7 +23,7 @@ class Thread
     /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 	void setUpSpinlock(pthread_spinlock_t* tmp_lock) { lock = tmp_lock; };
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-	void setUpSem(sem_t* tmp_sem) { sem = tmp_sem; };
+
 
 	void setThreadCore (int);            // Set core thread pinned on
     void setStartCalculatePoint (int);   // Set start calculate point for mul
@@ -60,7 +60,7 @@ class Thread
 	/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 	pthread_spinlock_t* lock;             
 	/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-	sem_t* sem;  
+ 
 
     int* sharedSum;                      // Shared resource
 

@@ -7,7 +7,7 @@ pthread_barrier_t System::barr;
 /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
 pthread_spinlock_t System::lock;
 /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-sem_t System::sem;
+
 
 /**
  * Set up the threadSet dependent on the inputfile.
@@ -126,9 +126,6 @@ System::init ()
 
 	/*~~~~~~~~~Your code(PART1&PART3)~~~~~~~~*/
     pthread_barrier_init(&System::barr, NULL, PROGRAM_NUM * 4);
-#if (PART == 1) //part1 code
-    sem_init(&System::sem, 0, PROGRAM_NUM * 4);
-#endif
 #if (PART == 3) //part3 code
     pthread_spin_init(&System::lock, PTHREAD_PROCESS_PRIVATE);
 #endif

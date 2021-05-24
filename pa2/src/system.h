@@ -26,7 +26,7 @@ class System
     /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
     void setUpSpinlock();           // Initialize the all spinlock
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-    void setUpSem(); 
+
 
 
     void init (); 
@@ -62,7 +62,7 @@ class System
     /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
     static pthread_spinlock_t lock; 
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
-    static sem_t sem; 
+
 
 };
 #endif
