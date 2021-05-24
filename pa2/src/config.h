@@ -10,8 +10,8 @@
 
 
 // Workload parameter
-#define PROGRAM_NUM 3
-#define MATRIX_SIZE 1500
+#define PROGRAM_NUM 2
+#define MATRIX_SIZE 100
 #define MULTI_TIME 2
 
 
