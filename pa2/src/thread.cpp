@@ -183,7 +183,8 @@ Thread::matrixMultiplication(void* args)
 
 #if (PART == 1)
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_lock(obj->ioMutex);
+				//pthread_mutex_lock(obj->ioMutex);
+				sem_wait(obj->sem);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
                 *obj->sharedSum = 0;
 	    		for (int k = 0 ; k < obj->matrixSize; k++)
@@ -191,7 +192,8 @@ Thread::matrixMultiplication(void* args)
 
                 obj->multiResult [i][j] = *obj->sharedSum;
 				/*~~~~~~~~~~~~Your code(PART1)~~~~~~~~~~~*/
-				pthread_mutex_unlock(obj->ioMutex);
+				//pthread_mutex_unlock(obj->ioMutex);
+				sem_post(obj->sem);
 				/*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
 #elif (PART == 3)
 				/*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/

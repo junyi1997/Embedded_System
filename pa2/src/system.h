@@ -24,8 +24,10 @@ class System
     void setUpBarr();           // Initialize the all matrix
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
-    void setUpSpinlock();           // Initialize the all matrix
+    void setUpSpinlock();           // Initialize the all spinlock
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    void setUpSem(); 
+
 
     void init (); 
     
@@ -58,8 +60,9 @@ class System
     static pthread_barrier_t barr; // IO mutex
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
     /*~~~~~~~~~~~~Your code(PART3)~~~~~~~~~~~*/
-    static pthread_spinlock_t lock; // IO mutex
+    static pthread_spinlock_t lock; 
     /*~~~~~~~~~~~~~~~~~~END~~~~~~~~~~~~~~~~~~*/
+    static sem_t sem; 
 
 };
 #endif
